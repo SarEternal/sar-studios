@@ -2,7 +2,9 @@ backend:
   name: github
   repo: SarEternal/sar-studios
   branch: main
-
+  base_url: https://sveltia-cms-auth.pages.dev
+  auth_endpoint: auth
+  
 media_folder: "images"
 public_folder: "images"
 
