@@ -1,29 +1,74 @@
 [
   {
-    "title": "Example Film One",
-    "year": "2024",
-    "duration": "12 min",
-    "genre": "Drama",
-    "description": "A short description of what this film is about. Replace this with your real synopsis.",
-    "poster": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=600&q=80",
-    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    "title": "Poker-Face",
+    "year": "Maj 2026",
+    "duration": "3m",
+    "genre": "Akcja",
+    "description": "Dwaj przyjaciele spotykają się, aby zagrać w pokera. Sytuacja szybko eskaluje.",
+    "poster": "https://img.youtube.com/vi/kwWnBSpw-Z8/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/kwWnBSpw-Z8"
   },
   {
-    "title": "Example Film Two",
-    "year": "2023",
-    "duration": "8 min",
+    "title": "Porwanie",
+    "year": "Lipiec 2025",
+    "duration": "5m",
+    "genre": "Thriller Akcji",
+    "description": "Dwaj przyjaciele spotykają podejrzanego mężczyznę. Sytuacja eskaluje szybko.",
+    "poster": "https://img.youtube.com/vi/CM9BbRtjFPo/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/CM9BbRtjFPo"
+  },
+  {
+    "title": "Morderca",
+    "year": "Sierpień 2025",
+    "duration": "6m",
     "genre": "Thriller",
-    "description": "Another short description. This is placeholder content — swap it out for your real films.",
-    "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80",
-    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    "description": "Widok z ekranu komputera. Jeden przyjaciel zostaje zabity, a jego przyjaciółka musi rozwiązać, kto go zabił.",
+    "poster": "https://img.youtube.com/vi/fvjlvCESGRo/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/fvjlvCESGRo"
   },
   {
-    "title": "Example Film Three",
-    "year": "2023",
-    "duration": "6 min",
-    "genre": "Experimental",
-    "description": "Your third film goes here. Add as many as you want — the grid grows automatically.",
-    "poster": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&q=80",
-    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    "title": "Przesyłka",
+    "year": "Sierpień 2025",
+    "duration": "2m",
+    "genre": "Mystery",
+    "description": "Mężczyzna znajduje podejrzaną paczkę.",
+    "poster": "https://img.youtube.com/vi/HQxrLtg0IiM/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/HQxrLtg0IiM"
+  },
+  {
+    "title": "Found Footage: Forest",
+    "year": "Marzec 2025",
+    "duration": "20m",
+    "genre": "Analog Horror",
+    "description": "Trzej przyjaciele spotykają się i widzą coś dziwnego w lesie. Wszystko przybiera bardzo zły obrót.",
+    "poster": "https://img.youtube.com/vi/fCExGHBgfm0/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/fCExGHBgfm0"
+  },
+  {
+    "title": "Wojna",
+    "year": "Grudzień 2024",
+    "duration": "2m",
+    "genre": "Akcja / Niemy",
+    "description": "Trzej uciekający żołnierze wpadają w kłopoty. Wszystko idzie źle.",
+    "poster": "https://img.youtube.com/vi/1pTnCFSvN1k/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/1pTnCFSvN1k"
+  },
+  {
+    "title": "Rozmówca",
+    "year": "Październik 2023",
+    "duration": "9m",
+    "genre": "Sci-Fi Thriller",
+    "description": "Mężczyzna odbiera telefon z podejrzanego numeru. Zaczynają dziać się niewyjaśnione rzeczy. Prawda okazuje się szokująca.",
+    "poster": "https://img.youtube.com/vi/YxGWK9c168c/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/YxGWK9c168c"
+  },
+  {
+    "title": "Po Drugiej Stronie",
+    "year": "Wrzesień 2022",
+    "duration": "9m",
+    "genre": "Comedy Horror",
+    "description": "Trzej przyjaciele wchodzą do lasu w poszukiwaniu zaginionych dzieci i trafiają do innego świata.",
+    "poster": "https://img.youtube.com/vi/Ixz02O9IctU/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/Ixz02O9IctU"
   }
 ]
