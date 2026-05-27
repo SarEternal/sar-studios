@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +34,7 @@
     font-size: 28px; letter-spacing: 4px;
     color: var(--offwhite); text-decoration: none;
   }
+  .nav-right { display: flex; align-items: center; gap: 36px; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
     color: var(--offwhite); text-decoration: none;
@@ -41,6 +42,23 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--yellow); }
+
+  /* LANGUAGE TOGGLE */
+  .lang-toggle {
+    display: flex; align-items: center; gap: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 4px;
+  }
+  .lang-btn {
+    background: none; border: none;
+    color: var(--offwhite); font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    padding: 4px 10px; border-radius: 16px;
+    cursor: pointer; transition: all 0.2s; opacity: 0.4;
+  }
+  .lang-btn.active {
+    background: var(--yellow); color: var(--black); opacity: 1;
+  }
 
   /* HERO */
   #home {
@@ -179,11 +197,8 @@
   }
   .film-card:hover .film-play-btn { opacity: 1; }
   .film-play-btn svg { width: 18px; height: 18px; fill: var(--black); margin-left: 3px; }
-
-  /* Empty state */
   .films-empty {
-    grid-column: 1 / -1;
-    padding: 80px; text-align: center;
+    grid-column: 1 / -1; padding: 80px; text-align: center;
     background: var(--grey);
     font-family: 'DM Serif Display', serif; font-style: italic;
     font-size: 20px; opacity: 0.4;
@@ -196,11 +211,9 @@
   }
   .team-card {
     background: var(--black); position: relative; overflow: hidden;
-    transition: background 0.3s; cursor: none;
+    transition: background 0.3s;
   }
-  .team-photo-wrap {
-    aspect-ratio: 3/4; overflow: hidden;
-  }
+  .team-photo-wrap { aspect-ratio: 3/4; overflow: hidden; }
   .team-photo {
     width: 100%; height: 100%; object-fit: cover;
     filter: grayscale(100%) contrast(1.1);
@@ -215,17 +228,12 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 64px; color: rgba(255,255,255,0.05); line-height: 1;
   }
-  .team-role {
-    font-size: 9px; letter-spacing: 3px; color: var(--yellow);
-    text-transform: uppercase; margin-bottom: 8px;
-  }
+  .team-role { font-size: 9px; letter-spacing: 3px; color: var(--yellow); text-transform: uppercase; margin-bottom: 8px; }
   .team-name { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 10px; }
   .team-bio { font-size: 10px; line-height: 1.8; opacity: 0.5; }
   .team-card:hover .team-info { background: var(--red); }
   .team-card:hover .team-role { color: var(--black); }
   .team-card:hover .team-bio { opacity: 0.8; }
-
-  /* Empty state */
   .team-empty {
     grid-column: 1 / -1; padding: 80px; text-align: center;
     background: var(--black);
@@ -239,7 +247,7 @@
     text-align: center; padding: 120px 48px; position: relative; overflow: hidden;
   }
   #contact::before {
-    content: 'CONNECT';
+    content: 'KONTAKT';
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     font-family: 'Bebas Neue', sans-serif; font-size: 200px;
     color: rgba(0,0,0,0.06); white-space: nowrap; pointer-events: none;
@@ -272,8 +280,7 @@
     position: absolute; top: -48px; right: 0;
     font-family: 'Bebas Neue', sans-serif; font-size: 20px;
     color: var(--offwhite); background: none; border: none;
-    letter-spacing: 3px; cursor: none; opacity: 0.6;
-    transition: opacity 0.2s;
+    letter-spacing: 3px; cursor: pointer; opacity: 0.6; transition: opacity 0.2s;
   }
   .modal-close:hover { opacity: 1; }
   .modal-video { width: 100%; aspect-ratio: 16/9; }
@@ -292,9 +299,12 @@
     #home { grid-template-columns: 1fr; }
     .hero-right { display: none; }
     #about { grid-template-columns: 1fr; padding: 80px 24px; }
-    .films-grid { grid-template-columns: 1fr; }
+    .films-grid { grid-template-columns: 1fr 1fr; }
     .team-grid { grid-template-columns: 1fr 1fr; }
     #films, #team, #contact { padding: 80px 24px; }
+  }
+  @media (max-width: 500px) {
+    .films-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -302,27 +312,33 @@
 
 <nav>
   <a href="#home" class="nav-logo">Sar Studios</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#films">Films</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about" data-pl="O nas" data-en="About">O nas</a></li>
+      <li><a href="#films" data-pl="Filmy" data-en="Films">Filmy</a></li>
+      <li><a href="#team" data-pl="Zespół" data-en="Team">Zespół</a></li>
+      <li><a href="#contact" data-pl="Kontakt" data-en="Contact">Kontakt</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section id="home">
   <div class="hero-left">
-    <p class="hero-tag">Independent Film Studio</p>
+    <p class="hero-tag" data-pl="Niezależne Studio Filmowe" data-en="Independent Film Studio">Niezależne Studio Filmowe</p>
     <h1 class="hero-title">Sar<br>Studios</h1>
-    <p class="hero-desc">We tell stories that don't wait for permission. Short films, big vision.</p>
-    <div class="scroll-hint">Scroll to explore</div>
+    <p class="hero-desc" data-pl="Opowiadamy historie, które nie czekają na pozwolenie. Krótkie filmy, wielka wizja." data-en="We tell stories that don't wait for permission. Short films, big vision.">Opowiadamy historie, które nie czekają na pozwolenie. Krótkie filmy, wielka wizja.</p>
+    <div class="scroll-hint" data-pl="Przewiń w dół" data-en="Scroll to explore">Przewiń w dół</div>
   </div>
   <div class="hero-right">
-    <p class="hero-since">Est.</p>
+    <p class="hero-since" data-pl="Zał." data-en="Est.">Zał.</p>
     <div class="hero-year">2022</div>
     <div class="stat-block" style="border-color: var(--offwhite); padding-left: 24px;">
-      <p class="hero-stat">Short films.<br>Real craft.<br>Growing team.</p>
+      <p class="hero-stat" data-pl="Krótkie filmy.<br>Prawdziwy warsztat.<br>Rosnący zespół." data-en="Short films.<br>Real craft.<br>Growing team.">Krótkie filmy.<br>Prawdziwy warsztat.<br>Rosnący zespół.</p>
     </div>
   </div>
 </section>
@@ -330,66 +346,87 @@
 <!-- ABOUT -->
 <section id="about">
   <div>
-    <p class="section-label dark">Who we are</p>
-    <h2 class="about-heading">We Make<br>Short Films<br>That Matter.</h2>
-    <p class="about-body">Sar Studios is an independent short film production house. For over three years we've been crafting stories that hit hard — raw, visual, and unapologetically bold. A tight crew with a growing core team, always pushing what's possible on a short film scale.</p>
+    <p class="section-label dark" data-pl="Kim jesteśmy" data-en="Who we are">Kim jesteśmy</p>
+    <h2 class="about-heading" data-pl="Tworzymy<br>Krótkie Filmy<br>Które Mają Sens." data-en="We Make<br>Short Films<br>That Matter.">Tworzymy<br>Krótkie Filmy<br>Które Mają Sens.</h2>
+    <p class="about-body" data-pl="Sar Studios to niezależne studio produkcji filmów krótkometrażowych. Od ponad trzech lat tworzymy historie, które uderzają — surowe, wizualne i bezkompromisowo odważne. Zgrany team z rosnącym składem, zawsze przesuwający granice tego, co możliwe w krótkim metrażu." data-en="Sar Studios is an independent short film production house. For over three years we've been crafting stories that hit hard — raw, visual, and unapologetically bold. A tight crew with a growing core team, always pushing what's possible on a short film scale.">Sar Studios to niezależne studio produkcji filmów krótkometrażowych. Od ponad trzech lat tworzymy historie, które uderzają — surowe, wizualne i bezkompromisowo odważne. Zgrany team z rosnącym składem, zawsze przesuwający granice tego, co możliwe w krótkim metrażu.</p>
   </div>
   <div class="about-right">
     <div class="stat-block">
       <div class="stat-num">3+</div>
-      <div class="stat-text">Years in production</div>
+      <div class="stat-text" data-pl="Lata produkcji" data-en="Years in production">Lata produkcji</div>
     </div>
     <div class="stat-block">
       <div class="stat-num">100%</div>
-      <div class="stat-text">Independent & passionate</div>
+      <div class="stat-text" data-pl="Niezależni i pełni pasji" data-en="Independent & passionate">Niezależni i pełni pasji</div>
     </div>
     <div class="stat-block">
       <div class="stat-num">∞</div>
-      <div class="stat-text">Stories left to tell</div>
+      <div class="stat-text" data-pl="Historii do opowiedzenia" data-en="Stories left to tell">Historii do opowiedzenia</div>
     </div>
   </div>
 </section>
 
 <!-- FILMS -->
 <section id="films">
-  <p class="section-label light">Our work</p>
-  <h2 class="section-heading">The Films.</h2>
+  <p class="section-label light" data-pl="Nasze prace" data-en="Our work">Nasze prace</p>
+  <h2 class="section-heading" data-pl="Filmy." data-en="The Films.">Filmy.</h2>
   <div class="films-grid" id="filmsGrid">
-    <div class="films-empty">Loading films...</div>
+    <div class="films-empty">Ładowanie filmów...</div>
   </div>
 </section>
 
 <!-- TEAM -->
 <section id="team">
-  <p class="section-label light">The crew</p>
-  <h2 class="section-heading">Core Team.</h2>
+  <p class="section-label light" data-pl="Ekipa" data-en="The crew">Ekipa</p>
+  <h2 class="section-heading" data-pl="Nasz Zespół." data-en="Core Team.">Nasz Zespół.</h2>
   <div class="team-grid" id="teamGrid">
-    <div class="team-empty">Loading team...</div>
+    <div class="team-empty">Ładowanie zespołu...</div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <p class="contact-label">Get in touch</p>
-  <h2 class="contact-heading">Let's Make<br>Something.</h2>
-  <a href="mailto:hello@sarstudios.com" class="contact-email">hello@sarstudios.com</a>
+  <p class="contact-label" data-pl="Skontaktuj się" data-en="Get in touch">Skontaktuj się</p>
+  <h2 class="contact-heading" data-pl="Zróbmy<br>Coś Razem." data-en="Let's Make<br>Something.">Zróbmy<br>Coś Razem.</h2>
+  <a href="mailto:sar.studios.mov.pl@gmail.com" class="contact-email">sar.studios.mov.pl@gmail.com</a>
 </section>
 
 <footer>
   <span>© 2026 Sar Studios</span>
-  <span>Independent Film Production</span>
+  <span data-pl="Niezależna Produkcja Filmowa" data-en="Independent Film Production">Niezależna Produkcja Filmowa</span>
 </footer>
 
 <!-- VIDEO MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal-inner">
-    <button class="modal-close" id="modalClose">✕ Close</button>
+    <button class="modal-close" id="modalClose">✕ Zamknij</button>
     <div class="modal-video" id="modalVideo"></div>
   </div>
 </div>
 
 <script>
-  // --- Convert YouTube URL to embed ---
+  // --- Language ---
+  let currentLang = 'pl';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    document.querySelectorAll('[data-pl]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-' + lang);
+    });
+    // Update modal close button
+    document.getElementById('modalClose').textContent = lang === 'pl' ? '✕ Zamknij' : '✕ Close';
+    // Update loading states
+    document.querySelectorAll('.films-empty').forEach(el => {
+      if (el.textContent.includes('Ładowanie') || el.textContent.includes('Loading')) {
+        el.textContent = lang === 'pl' ? 'Ładowanie filmów...' : 'Loading films...';
+      }
+    });
+  }
+
+  // --- YouTube embed ---
   function getYouTubeEmbed(url) {
     const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
     return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : url;
@@ -403,10 +440,7 @@
     modalVideo.innerHTML = '';
   });
   modal.addEventListener('click', e => {
-    if (e.target === modal) {
-      modal.classList.remove('open');
-      modalVideo.innerHTML = '';
-    }
+    if (e.target === modal) { modal.classList.remove('open'); modalVideo.innerHTML = ''; }
   });
   function openFilm(url) {
     modalVideo.innerHTML = `<iframe src="${getYouTubeEmbed(url)}" allowfullscreen allow="autoplay"></iframe>`;
@@ -416,10 +450,7 @@
   // --- Scroll reveal ---
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
+      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
     });
   }, { threshold: 0.1 });
 
@@ -437,11 +468,11 @@
       const res = await fetch('_data/films.json');
       const films = await res.json();
       if (!films.length) {
-        grid.innerHTML = '<div class="films-empty">No films yet — add your first one in the admin panel.</div>';
+        grid.innerHTML = `<div class="films-empty" data-pl="Brak filmów." data-en="No films yet.">Brak filmów.</div>`;
         return;
       }
       grid.innerHTML = '';
-      films.forEach((film, i) => {
+      films.forEach(film => {
         const card = document.createElement('div');
         card.className = 'film-card';
         card.innerHTML = `
@@ -461,7 +492,7 @@
         revealOnScroll(card);
       });
     } catch(e) {
-      grid.innerHTML = '<div class="films-empty">Could not load films.</div>';
+      grid.innerHTML = '<div class="films-empty">Nie można załadować filmów.</div>';
     }
   }
 
@@ -472,7 +503,7 @@
       const res = await fetch('_data/team.json');
       const team = await res.json();
       if (!team.length) {
-        grid.innerHTML = '<div class="team-empty">No team members yet.</div>';
+        grid.innerHTML = '<div class="team-empty">Brak członków zespołu.</div>';
         return;
       }
       grid.innerHTML = '';
@@ -494,7 +525,7 @@
         revealOnScroll(card);
       });
     } catch(e) {
-      grid.innerHTML = '<div class="team-empty">Could not load team.</div>';
+      grid.innerHTML = '<div class="team-empty">Nie można załadować zespołu.</div>';
     }
   }
 
