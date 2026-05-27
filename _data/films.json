@@ -2,7 +2,7 @@
   {
     "title": "Poker-Face",
     "year": "Maj 2026",
-    "duration": "3m",
+    "duration": "3 min",
     "genre": "Akcja",
     "description": "Dwaj przyjaciele spotykają się, aby zagrać w pokera. Sytuacja szybko eskaluje.",
     "poster": "https://img.youtube.com/vi/kwWnBSpw-Z8/maxresdefault.jpg",
@@ -11,16 +11,34 @@
   {
     "title": "Porwanie",
     "year": "Lipiec 2025",
-    "duration": "5m",
+    "duration": "5 min",
     "genre": "Thriller Akcji",
     "description": "Dwaj przyjaciele spotykają podejrzanego mężczyznę. Sytuacja eskaluje szybko.",
     "poster": "https://img.youtube.com/vi/CM9BbRtjFPo/maxresdefault.jpg",
     "videoUrl": "https://youtu.be/CM9BbRtjFPo"
   },
   {
+    "title": "Wojna",
+    "year": "Grudzień 2024",
+    "duration": "3 min",
+    "genre": "Akcja / Niemy",
+    "description": "Trzej uciekający żołnierze wpadają w kłopoty. Wszystko idzie źle.",
+    "poster": "https://img.youtube.com/vi/1pTnCFSvN1k/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/1pTnCFSvN1k"
+  },
+  {
+    "title": "Found Footage: Forest",
+    "year": "Marzec 2025",
+    "duration": "20 min",
+    "genre": "Analog Horror",
+    "description": "Trzej przyjaciele spotykają się i widzą coś dziwnego w lesie. Wszystko przybiera bardzo zły obrót.",
+    "poster": "https://img.youtube.com/vi/fCExGHBgfm0/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/fCExGHBgfm0"
+  },
+  {
     "title": "Morderca",
     "year": "Sierpień 2025",
-    "duration": "6m",
+    "duration": "6 min",
     "genre": "Thriller",
     "description": "Widok z ekranu komputera. Jeden przyjaciel zostaje zabity, a jego przyjaciółka musi rozwiązać, kto go zabił.",
     "poster": "https://img.youtube.com/vi/fvjlvCESGRo/maxresdefault.jpg",
@@ -29,46 +47,28 @@
   {
     "title": "Przesyłka",
     "year": "Sierpień 2025",
-    "duration": "2m",
+    "duration": "2 min",
     "genre": "Mystery",
     "description": "Mężczyzna znajduje podejrzaną paczkę.",
     "poster": "https://img.youtube.com/vi/HQxrLtg0IiM/maxresdefault.jpg",
     "videoUrl": "https://youtu.be/HQxrLtg0IiM"
   },
   {
-    "title": "Found Footage: Forest",
-    "year": "Marzec 2025",
-    "duration": "20m",
-    "genre": "Analog Horror",
-    "description": "Trzej przyjaciele spotykają się i widzą coś dziwnego w lesie. Wszystko przybiera bardzo zły obrót.",
-    "poster": "https://img.youtube.com/vi/fCExGHBgfm0/maxresdefault.jpg",
-    "videoUrl": "https://youtu.be/fCExGHBgfm0"
-  },
-  {
-    "title": "Wojna",
-    "year": "Grudzień 2024",
-    "duration": "2m",
-    "genre": "Akcja / Niemy",
-    "description": "Trzej uciekający żołnierze wpadają w kłopoty. Wszystko idzie źle.",
-    "poster": "https://img.youtube.com/vi/1pTnCFSvN1k/maxresdefault.jpg",
-    "videoUrl": "https://youtu.be/1pTnCFSvN1k"
-  },
-  {
-    "title": "Rozmówca",
-    "year": "Październik 2023",
-    "duration": "9m",
-    "genre": "Sci-Fi Thriller",
-    "description": "Mężczyzna odbiera telefon z podejrzanego numeru. Zaczynają dziać się niewyjaśnione rzeczy. Prawda okazuje się szokująca.",
-    "poster": "https://img.youtube.com/vi/YxGWK9c168c/maxresdefault.jpg",
-    "videoUrl": "https://youtu.be/YxGWK9c168c"
-  },
-  {
     "title": "Po Drugiej Stronie",
     "year": "Wrzesień 2022",
-    "duration": "9m",
+    "duration": "9 min",
     "genre": "Comedy Horror",
     "description": "Trzej przyjaciele wchodzą do lasu w poszukiwaniu zaginionych dzieci i trafiają do innego świata.",
     "poster": "https://img.youtube.com/vi/Ixz02O9IctU/maxresdefault.jpg",
     "videoUrl": "https://youtu.be/Ixz02O9IctU"
+  },
+  {
+    "title": "Rozmówca",
+    "year": "Październik 2023",
+    "duration": "9 min",
+    "genre": "Sci-Fi Thriller",
+    "description": "Mężczyzna odbiera telefon z podejrzanego numeru. Zaczynają dziać się niewyjaśnione rzeczy. Prawda okazuje się szokująca.",
+    "poster": "https://img.youtube.com/vi/YxGWK9c168c/maxresdefault.jpg",
+    "videoUrl": "https://youtu.be/YxGWK9c168c"
   }
 ]
