@@ -142,7 +142,8 @@
   }
   .about-right { display: flex; flex-direction: column; gap: 32px; }
   .stat-block { border-left: 3px solid var(--black); padding-left: 24px; }
-  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; font-variant-emoji: text; }
+  .stat-num::after { content: none; }
   .stat-text { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-top: 4px; }
 
   /* FILMS */
@@ -389,10 +390,6 @@
     <div class="stat-block">
       <div class="stat-num">100%</div>
       <div class="stat-text" data-pl="Niezależni i pełni pasji" data-en="Independent & passionate">Niezależni i pełni pasji</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num" style="font-family: 'Bebas Neue', sans-serif;">&#8734;&#xFE0E;</div>
-      <div class="stat-text" data-pl="Historii do opowiedzenia" data-en="Stories left to tell">Historii do opowiedzenia</div>
     </div>
   </div>
 </section>
