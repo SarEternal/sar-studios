@@ -9,18 +9,19 @@
     "name": "Olaf C.",
     "role": "Aktor",
     "bio": "Jeden z głównych aktorów Sar Studios oraz jest prawą reką w naszych produkcjach.",
-    "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/v1780060320/IMG_6893_SnapseedCopy_SnapseedCopy_ek8k3a.jpg"
+    "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/v1780065767/IMG_6893_SnapseedCopy_SnapseedCopy_dznhek.jpg"
   },
+  {
+       "name": "Yaroslav K.",
+    "role": "Aktor / Muzyka",
+    "bio": "Aktor i twórca muzyki w Sar Studios. Odpowiada za atmosferę dźwiękową naszych filmów.",
+    "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/v1779983377/IMG_6804_r2eo5v.jpg"
+},
   {
     "name": "Tomasz K.",
     "role": "Kamerzysta",
     "bio": "Kamerzysta Sar Studios. Odpowiada za obraz i ujęcia w naszych produkcjach.",
     "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/v1779983376/IMG_6762_SnapseedCopy_awfpeg.jpg"
-  },
-  {
-    "name": "Yaroslav K.",
-    "role": "Aktor / Muzyka",
-    "bio": "Aktor i twórca muzyki w Sar Studios. Odpowiada za atmosferę dźwiękową naszych filmów.",
-    "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/v1779983377/IMG_6804_r2eo5v.jpg"
   }
 ]
+  
