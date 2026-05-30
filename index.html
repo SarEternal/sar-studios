@@ -262,6 +262,49 @@
   .modal-info-meta { font-size: 11px; color: var(--offwhite); opacity: 0.4; letter-spacing: 2px; margin-bottom: 16px; }
   .modal-info-desc { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--offwhite); opacity: 0.7; line-height: 1.6; }
 
+  /* Disclaimer banner inside modal */
+  .modal-disclaimer {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: rgba(245,200,0,0.07);
+    border: 1px solid rgba(245,200,0,0.25);
+    border-left: 3px solid var(--yellow);
+    border-radius: 2px;
+  }
+  .modal-disclaimer-icon { font-size: 15px; line-height: 1; flex-shrink: 0; margin-top: 1px; }
+  .modal-disclaimer-text { font-size: 10px; letter-spacing: 1px; line-height: 1.7; color: var(--offwhite); opacity: 0.6; }
+  .modal-disclaimer-label {
+    display: block; font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--yellow); opacity: 1; margin-bottom: 4px;
+  }
+
+  /* Version toggle */
+  .modal-version-toggle {
+    display: flex; align-items: center; gap: 0;
+    margin-top: 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    width: fit-content;
+  }
+  .version-btn {
+    background: none; border: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--offwhite); opacity: 0.4;
+    padding: 8px 18px; cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .version-btn.active { background: var(--yellow); color: var(--black); opacity: 1; }
+  .version-btn:not(:last-child)::after {
+    content: ''; position: absolute; right: 0; top: 20%; height: 60%;
+    width: 1px; background: rgba(255,255,255,0.1);
+  }
+  .version-btn.active::after { display: none; }
+
   @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
   @media (max-width: 900px) {
@@ -416,14 +459,50 @@
   document.getElementById('modalClose').addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 
+  function loadVideo(url) {
+    modalVideo.innerHTML = `<iframe src="${getYouTubeEmbed(url)}" allowfullscreen allow="autoplay"></iframe>`;
+  }
+
   function openFilm(film) {
-    modalVideo.innerHTML = `<iframe src="${getYouTubeEmbed(film.videoUrl)}" allowfullscreen allow="autoplay"></iframe>`;
+    const isWarning = WARNING_FILMS.includes(film.title);
+    const hasVersions = !!film.originalUrl;
+
+    loadVideo(film.videoUrl);
+
+    const disclaimerHtml = isWarning ? `
+      <div class="modal-disclaimer">
+        <span class="modal-disclaimer-icon">⚠️</span>
+        <span class="modal-disclaimer-text">
+          <span class="modal-disclaimer-label" data-pl="Uwaga" data-en="Note">Uwaga</span>
+          <span data-pl="${WARNING_TEXT_PL}" data-en="${WARNING_TEXT_EN}">${currentLang === 'pl' ? WARNING_TEXT_PL : WARNING_TEXT_EN}</span>
+        </span>
+      </div>` : '';
+
+    const versionToggleHtml = hasVersions ? `
+      <div class="modal-version-toggle" id="versionToggle">
+        <button class="version-btn active" data-url="${film.videoUrl}" data-pl="Remaster" data-en="Remaster">Remaster</button>
+        <button class="version-btn" data-url="${film.originalUrl}" data-pl="Oryginał" data-en="Original">Oryginał</button>
+      </div>` : '';
+
     modalInfo.innerHTML = `
       <p class="modal-info-genre">${film.genre}</p>
       <p class="modal-info-title">${film.title}</p>
       <p class="modal-info-meta">${film.year} · ${film.duration}</p>
       <p class="modal-info-desc">${film.description}</p>
+      ${versionToggleHtml}
+      ${disclaimerHtml}
     `;
+
+    if (hasVersions) {
+      modalInfo.querySelectorAll('.version-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          modalInfo.querySelectorAll('.version-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          loadVideo(btn.dataset.url);
+        });
+      });
+    }
+
     modal.classList.add('open');
   }
 
