@@ -1,11 +1,686 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sar Studios Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sar Studios — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --red: #E8230A;
+    --yellow: #F5C800;
+    --black: #0A0A0A;
+    --offwhite: #F0EBE1;
+    --grey: #1A1A1A;
+    --grey2: #252525;
+    --border: rgba(255,255,255,0.08);
+  }
+  body {
+    background: var(--black); color: var(--offwhite);
+    font-family: 'Space Mono', monospace;
+    min-height: 100vh; overflow-x: hidden;
+  }
+
+  /* ── LOGIN ── */
+  #loginScreen {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .login-box {
+    width: 100%; max-width: 380px;
+  }
+  .login-logo {
+    font-family: 'Bebas Neue', sans-serif; font-size: 48px;
+    color: var(--red); letter-spacing: 2px; margin-bottom: 4px;
+  }
+  .login-sub {
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--offwhite); opacity: 0.3; margin-bottom: 48px;
+  }
+  .login-label {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    opacity: 0.4; margin-bottom: 8px; display: block;
+  }
+  .login-input {
+    width: 100%; background: var(--grey); border: 1px solid var(--border);
+    color: var(--offwhite); font-family: 'Space Mono', monospace;
+    font-size: 13px; padding: 14px 16px; border-radius: 2px;
+    outline: none; transition: border-color 0.2s; margin-bottom: 16px;
+  }
+  .login-input:focus { border-color: var(--yellow); }
+  .login-btn {
+    width: 100%; background: var(--yellow); color: var(--black);
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px;
+    border: none; padding: 14px; cursor: pointer; border-radius: 2px;
+    transition: opacity 0.2s;
+  }
+  .login-btn:hover { opacity: 0.85; }
+  .login-error {
+    font-size: 10px; letter-spacing: 2px; color: var(--red);
+    margin-top: 12px; display: none; text-align: center;
+  }
+  .token-wrap { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .token-hint {
+    font-size: 9px; letter-spacing: 1px; line-height: 1.8;
+    opacity: 0.35; margin-bottom: 12px;
+  }
+  .token-hint a { color: var(--yellow); text-decoration: none; }
+
+  /* ── ADMIN SHELL ── */
+  #adminScreen { display: none; }
+  .top-bar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,10,10,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+  }
+  .top-bar-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--red); letter-spacing: 2px; }
+  .top-bar-right { display: flex; align-items: center; gap: 16px; }
+  .save-status { font-size: 9px; letter-spacing: 2px; opacity: 0.4; text-transform: uppercase; }
+  .save-status.saving { color: var(--yellow); opacity: 1; }
+  .save-status.saved { color: #4CAF50; opacity: 1; }
+  .save-status.error { color: var(--red); opacity: 1; }
+  .logout-btn {
+    background: none; border: 1px solid var(--border); color: var(--offwhite);
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 14px; cursor: pointer; border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .logout-btn:hover { border-color: var(--red); color: var(--red); }
+
+  .admin-body { max-width: 1100px; margin: 0 auto; padding: 40px 32px 80px; }
+
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 0; margin-bottom: 40px; border-bottom: 1px solid var(--border); }
+  .tab-btn {
+    background: none; border: none; color: var(--offwhite); opacity: 0.3;
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px;
+    padding: 12px 28px 14px; cursor: pointer; position: relative; transition: opacity 0.2s;
+  }
+  .tab-btn::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 2px; background: var(--yellow); transform: scaleX(0); transition: transform 0.2s;
+  }
+  .tab-btn.active { opacity: 1; }
+  .tab-btn.active::after { transform: scaleX(1); }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;
+  }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; }
+  .add-btn {
+    background: var(--yellow); color: var(--black);
+    font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px;
+    border: none; padding: 10px 24px; cursor: pointer; border-radius: 2px;
+    transition: opacity 0.2s; display: flex; align-items: center; gap: 8px;
+  }
+  .add-btn:hover { opacity: 0.85; }
+
+  /* ── CARDS ── */
+  .cards-list { display: flex; flex-direction: column; gap: 3px; }
+  .entry-card {
+    background: var(--grey); border: 1px solid var(--border);
+    border-radius: 2px; overflow: hidden;
+  }
+  .entry-card-header {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; cursor: pointer; user-select: none;
+    transition: background 0.2s;
+  }
+  .entry-card-header:hover { background: var(--grey2); }
+  .drag-handle { color: var(--offwhite); opacity: 0.2; font-size: 16px; cursor: grab; flex-shrink: 0; }
+  .entry-thumb {
+    width: 40px; height: 56px; object-fit: cover; border-radius: 1px;
+    flex-shrink: 0; background: var(--grey2);
+  }
+  .entry-thumb-placeholder {
+    width: 40px; height: 56px; background: var(--grey2); border-radius: 1px;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; opacity: 0.3;
+  }
+  .entry-card-meta { flex: 1; min-width: 0; }
+  .entry-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .entry-card-sub { font-size: 9px; letter-spacing: 2px; opacity: 0.4; text-transform: uppercase; margin-top: 2px; }
+  .entry-card-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .icon-btn {
+    background: none; border: 1px solid var(--border); color: var(--offwhite);
+    font-size: 14px; width: 32px; height: 32px; border-radius: 2px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; opacity: 0.5;
+  }
+  .icon-btn:hover { opacity: 1; }
+  .icon-btn.delete:hover { border-color: var(--red); color: var(--red); }
+  .chevron { font-size: 10px; opacity: 0.4; transition: transform 0.2s; flex-shrink: 0; }
+  .entry-card.open .chevron { transform: rotate(180deg); }
+
+  /* ── FORM ── */
+  .entry-form { padding: 0 20px 24px; border-top: 1px solid var(--border); display: none; }
+  .entry-card.open .entry-form { display: block; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  .form-full { grid-column: 1 / -1; }
+  .field-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; margin-bottom: 6px; display: block; }
+  .field-input, .field-textarea, .field-select {
+    width: 100%; background: var(--black); border: 1px solid var(--border);
+    color: var(--offwhite); font-family: 'Space Mono', monospace;
+    font-size: 12px; padding: 10px 12px; border-radius: 2px;
+    outline: none; transition: border-color 0.2s;
+  }
+  .field-input:focus, .field-textarea:focus, .field-select:focus { border-color: var(--yellow); }
+  .field-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+  .field-select { appearance: none; cursor: pointer; }
+  .poster-preview-wrap { position: relative; }
+  .poster-preview {
+    width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 2px;
+    background: var(--black); border: 1px solid var(--border);
+    display: block; max-width: 140px;
+  }
+  .poster-preview-placeholder {
+    width: 140px; aspect-ratio: 2/3; background: var(--grey2);
+    border: 1px dashed var(--border); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; opacity: 0.2;
+  }
+  .field-hint { font-size: 9px; letter-spacing: 1px; opacity: 0.3; margin-top: 6px; line-height: 1.6; }
+  .warning-toggle { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+  .toggle-switch {
+    position: relative; width: 40px; height: 22px; flex-shrink: 0;
+  }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .toggle-track {
+    position: absolute; inset: 0; background: var(--grey2);
+    border: 1px solid var(--border); border-radius: 11px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .toggle-track::after {
+    content: ''; position: absolute; top: 3px; left: 3px;
+    width: 14px; height: 14px; background: var(--offwhite);
+    border-radius: 50%; transition: transform 0.2s; opacity: 0.4;
+  }
+  .toggle-switch input:checked + .toggle-track { background: var(--yellow); border-color: var(--yellow); }
+  .toggle-switch input:checked + .toggle-track::after { transform: translateX(18px); opacity: 1; }
+  .toggle-label { font-size: 10px; letter-spacing: 1px; opacity: 0.5; }
+
+  /* ── TEAM PHOTO ── */
+  .team-thumb { width: 40px; height: 54px; object-fit: cover; border-radius: 1px; flex-shrink: 0; background: var(--grey2); }
+
+  /* ── COMMIT BAR ── */
+  .commit-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--grey); border-top: 1px solid var(--border);
+    padding: 16px 32px; display: flex; align-items: center; gap: 16px;
+    transform: translateY(100%); transition: transform 0.3s;
+    z-index: 100;
+  }
+  .commit-bar.visible { transform: translateY(0); }
+  .commit-msg-input {
+    flex: 1; background: var(--black); border: 1px solid var(--border);
+    color: var(--offwhite); font-family: 'Space Mono', monospace;
+    font-size: 11px; padding: 10px 14px; border-radius: 2px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .commit-msg-input:focus { border-color: var(--yellow); }
+  .commit-btn {
+    background: var(--red); color: var(--offwhite);
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px;
+    border: none; padding: 10px 28px; cursor: pointer; border-radius: 2px;
+    transition: opacity 0.2s; white-space: nowrap;
+  }
+  .commit-btn:hover { opacity: 0.85; }
+  .commit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .discard-btn {
+    background: none; border: 1px solid var(--border); color: var(--offwhite);
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px;
+    padding: 10px 16px; cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .discard-btn:hover { border-color: var(--red); color: var(--red); }
+
+  .empty-state {
+    text-align: center; padding: 60px; background: var(--grey); border-radius: 2px;
+    font-family: 'DM Serif Display', serif; font-style: italic; font-size: 18px; opacity: 0.3;
+  }
+
+  @media (max-width: 600px) {
+    .admin-body { padding: 24px 16px 100px; }
+    .top-bar { padding: 14px 16px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .commit-bar { padding: 12px 16px; flex-wrap: wrap; }
+    .commit-msg-input { min-width: 0; }
+  }
+</style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">Sar Studios</div>
+    <div class="login-sub">Admin Panel</div>
+
+    <label class="login-label">Password</label>
+    <input class="login-input" type="password" id="passwordInput" placeholder="••••••••••" autocomplete="current-password">
+
+    <div class="token-wrap">
+      <p class="token-hint">GitHub Personal Access Token — needed to save changes to your repo.<br>
+      <a href="https://github.com/settings/tokens/new?scopes=contents&description=SarStudiosAdmin" target="_blank">Generate one here</a> (Contents: Read & Write).</p>
+      <label class="login-label">GitHub Token</label>
+      <input class="login-input" type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+    </div>
+
+    <button class="login-btn" onclick="login()">ENTER</button>
+    <div class="login-error" id="loginError">Incorrect password.</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="adminScreen">
+  <div class="top-bar">
+    <div class="top-bar-logo">Sar Studios — Admin</div>
+    <div class="top-bar-right">
+      <span class="save-status" id="saveStatus"></span>
+      <button class="logout-btn" onclick="logout()">Log out</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('films', this)">Films</button>
+      <button class="tab-btn" onclick="switchTab('team', this)">Team</button>
+    </div>
+
+    <!-- FILMS TAB -->
+    <div id="tab-films">
+      <div class="section-header">
+        <div class="section-title">Films</div>
+        <button class="add-btn" onclick="addFilm()">+ Add Film</button>
+      </div>
+      <div class="cards-list" id="filmsList"></div>
+    </div>
+
+    <!-- TEAM TAB -->
+    <div id="tab-team" style="display:none">
+      <div class="section-header">
+        <div class="section-title">Team</div>
+        <button class="add-btn" onclick="addMember()">+ Add Member</button>
+      </div>
+      <div class="cards-list" id="teamList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMIT BAR -->
+<div class="commit-bar" id="commitBar">
+  <input class="commit-msg-input" id="commitMsg" placeholder="Describe your changes (e.g. Added Poker-Face film)" value="Update content via admin">
+  <button class="discard-btn" onclick="discardChanges()">Discard</button>
+  <button class="commit-btn" id="commitBtn" onclick="saveToGitHub()">SAVE TO SITE</button>
+</div>
+
+<script>
+  const REPO = 'SarEternal/sar-studios';
+  const CORRECT_PASSWORD = 'SarStudios23';
+  const WARNING_FILMS = ['Po Drugiej Stronie', 'Rozmówca'];
+
+  let ghToken = '';
+  let filmsData = [];
+  let teamData = [];
+  let filmsSha = '';
+  let teamSha = '';
+  let dirty = false;
+
+  /* ── AUTH ── */
+  function login() {
+    const pw = document.getElementById('passwordInput').value;
+    const token = document.getElementById('tokenInput').value.trim();
+    if (pw !== CORRECT_PASSWORD) {
+      document.getElementById('loginError').style.display = 'block';
+      return;
+    }
+    if (!token) {
+      document.getElementById('loginError').textContent = 'GitHub token is required.';
+      document.getElementById('loginError').style.display = 'block';
+      return;
+    }
+    ghToken = token;
+    sessionStorage.setItem('sar_token', token);
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    loadData();
+  }
+
+  document.getElementById('passwordInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+  document.getElementById('tokenInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+  function logout() {
+    sessionStorage.removeItem('sar_token');
+    location.reload();
+  }
+
+  /* Auto-restore token from session */
+  window.addEventListener('load', () => {
+    const t = sessionStorage.getItem('sar_token');
+    if (t) { document.getElementById('tokenInput').value = t; }
+  });
+
+  /* ── TABS ── */
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-films').style.display = name === 'films' ? '' : 'none';
+    document.getElementById('tab-team').style.display = name === 'team' ? '' : 'none';
+  }
+
+  /* ── GITHUB API ── */
+  async function ghGet(path) {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+      headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error(`GitHub ${r.status}: ${r.statusText}`);
+    return r.json();
+  }
+
+  async function ghPut(path, content, sha, message) {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(content))), sha })
+    });
+    if (!r.ok) { const err = await r.json(); throw new Error(err.message || r.statusText); }
+    return r.json();
+  }
+
+  async function loadData() {
+    setStatus('Loading...', 'saving');
+    try {
+      const [fd, td] = await Promise.all([ghGet('_data/films.json'), ghGet('_data/team.json')]);
+      filmsSha = fd.sha;
+      teamSha = td.sha;
+      filmsData = JSON.parse(atob(fd.content.replace(/\n/g, '')));
+      teamData  = JSON.parse(atob(td.content.replace(/\n/g, '')));
+      renderFilms();
+      renderTeam();
+      setStatus('', '');
+    } catch(e) {
+      setStatus('Load error: ' + e.message, 'error');
+    }
+  }
+
+  /* ── STATUS ── */
+  function setStatus(msg, cls) {
+    const el = document.getElementById('saveStatus');
+    el.textContent = msg;
+    el.className = 'save-status' + (cls ? ' ' + cls : '');
+  }
+
+  /* ── DIRTY STATE ── */
+  function markDirty() {
+    dirty = true;
+    document.getElementById('commitBar').classList.add('visible');
+  }
+  function discardChanges() {
+    dirty = false;
+    document.getElementById('commitBar').classList.remove('visible');
+    loadData();
+  }
+
+  /* ── SAVE TO GITHUB ── */
+  async function saveToGitHub() {
+    const msg = document.getElementById('commitMsg').value || 'Update content via admin';
+    const btn = document.getElementById('commitBtn');
+    btn.disabled = true;
+    setStatus('Saving...', 'saving');
+    try {
+      const [fr, tr] = await Promise.all([
+        ghPut('_data/films.json', JSON.stringify(filmsData, null, 2), filmsSha, msg),
+        ghPut('_data/team.json',  JSON.stringify(teamData,  null, 2), teamSha,  msg)
+      ]);
+      filmsSha = fr.content.sha;
+      teamSha  = tr.content.sha;
+      dirty = false;
+      document.getElementById('commitBar').classList.remove('visible');
+      setStatus('Saved ✓', 'saved');
+      setTimeout(() => setStatus('', ''), 3000);
+    } catch(e) {
+      setStatus('Error: ' + e.message, 'error');
+    }
+    btn.disabled = false;
+  }
+
+  /* ── FILMS ── */
+  function renderFilms() {
+    const list = document.getElementById('filmsList');
+    if (!filmsData.length) { list.innerHTML = '<div class="empty-state">No films yet. Add one above.</div>'; return; }
+    list.innerHTML = '';
+    filmsData.forEach((film, i) => list.appendChild(filmCard(film, i)));
+  }
+
+  function filmCard(film, i) {
+    const isWarning = WARNING_FILMS.includes(film.title);
+    const hasOriginal = !!film.originalUrl;
+
+    const div = document.createElement('div');
+    div.className = 'entry-card';
+    div.dataset.index = i;
+
+    div.innerHTML = `
+      <div class="entry-card-header" onclick="toggleCard(this)">
+        <span class="drag-handle">⠿</span>
+        ${film.poster
+          ? `<img class="entry-thumb" src="${film.poster}" alt="">`
+          : `<div class="entry-thumb-placeholder">🎬</div>`}
+        <div class="entry-card-meta">
+          <div class="entry-card-title">${film.title || 'Untitled Film'}</div>
+          <div class="entry-card-sub">${film.year || '—'} · ${film.genre || '—'}</div>
+        </div>
+        <div class="entry-card-actions" onclick="event.stopPropagation()">
+          <button class="icon-btn" title="Move up" onclick="moveFilm(${i}, -1)">↑</button>
+          <button class="icon-btn" title="Move down" onclick="moveFilm(${i}, 1)">↓</button>
+          <button class="icon-btn delete" title="Delete" onclick="deleteFilm(${i})">✕</button>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="entry-form">
+        <div class="form-grid">
+          <div>
+            <label class="field-label">Title</label>
+            <input class="field-input" value="${esc(film.title)}" onchange="updateFilm(${i}, 'title', this.value)">
+          </div>
+          <div>
+            <label class="field-label">Genre</label>
+            <input class="field-input" value="${esc(film.genre)}" onchange="updateFilm(${i}, 'genre', this.value)">
+          </div>
+          <div>
+            <label class="field-label">Year</label>
+            <input class="field-input" value="${esc(film.year)}" onchange="updateFilm(${i}, 'year', this.value)">
+          </div>
+          <div>
+            <label class="field-label">Duration</label>
+            <input class="field-input" value="${esc(film.duration)}" onchange="updateFilm(${i}, 'duration', this.value)">
+          </div>
+          <div class="form-full">
+            <label class="field-label">Description</label>
+            <textarea class="field-textarea" onchange="updateFilm(${i}, 'description', this.value)">${esc(film.description)}</textarea>
+          </div>
+          <div class="form-full">
+            <label class="field-label">Poster URL (Cloudinary)</label>
+            <input class="field-input" value="${esc(film.poster)}" onchange="updateFilm(${i}, 'poster', this.value); refreshThumb(this, ${i})">
+            <p class="field-hint">Upload image to Cloudinary, paste the URL here.</p>
+          </div>
+          <div class="form-full">
+            <label class="field-label">Video URL${hasOriginal ? ' (Remaster)' : ''}</label>
+            <input class="field-input" value="${esc(film.videoUrl)}" onchange="updateFilm(${i}, 'videoUrl', this.value)">
+            <p class="field-hint">YouTube link (youtu.be/... or youtube.com/watch?v=...)</p>
+          </div>
+          ${hasOriginal ? `
+          <div class="form-full">
+            <label class="field-label">Original Version URL</label>
+            <input class="field-input" value="${esc(film.originalUrl)}" onchange="updateFilm(${i}, 'originalUrl', this.value)">
+            <p class="field-hint">Leave blank to remove the Remaster/Original toggle.</p>
+          </div>` : `
+          <div class="form-full">
+            <label class="field-label">Original Version URL <span style="opacity:0.4">(optional — enables Remaster toggle)</span></label>
+            <input class="field-input" value="" placeholder="Leave blank unless this film has two versions" onchange="updateFilm(${i}, 'originalUrl', this.value)">
+          </div>`}
+          <div class="form-full">
+            <label class="field-label">Early Film Warning</label>
+            <div class="warning-toggle">
+              <label class="toggle-switch">
+                <input type="checkbox" ${isWarning ? 'checked' : ''} onchange="toggleWarning(${i}, this.checked)">
+                <span class="toggle-track"></span>
+              </label>
+              <span class="toggle-label">Show "early studio film" disclaimer on this film</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    return div;
+  }
+
+  function updateFilm(i, key, val) {
+    filmsData[i][key] = val;
+    markDirty();
+    /* refresh title in header */
+    const cards = document.querySelectorAll('#filmsList .entry-card');
+    if (cards[i]) {
+      const titleEl = cards[i].querySelector('.entry-card-title');
+      const subEl   = cards[i].querySelector('.entry-card-sub');
+      if (key === 'title' && titleEl) titleEl.textContent = val || 'Untitled Film';
+      if ((key === 'year' || key === 'genre') && subEl) subEl.textContent = `${filmsData[i].year || '—'} · ${filmsData[i].genre || '—'}`;
+    }
+  }
+
+  function refreshThumb(input, i) {
+    const card = document.querySelectorAll('#filmsList .entry-card')[i];
+    if (!card) return;
+    const thumb = card.querySelector('.entry-thumb, .entry-thumb-placeholder');
+    if (!thumb) return;
+    if (input.value) {
+      const img = document.createElement('img');
+      img.className = 'entry-thumb'; img.src = input.value; img.alt = '';
+      thumb.replaceWith(img);
+    }
+  }
+
+  function toggleWarning(i, checked) {
+    const title = filmsData[i].title;
+    if (checked && !WARNING_FILMS.includes(title)) WARNING_FILMS.push(title);
+    if (!checked) { const idx = WARNING_FILMS.indexOf(title); if (idx > -1) WARNING_FILMS.splice(idx, 1); }
+    markDirty();
+  }
+
+  function moveFilm(i, dir) {
+    const j = i + dir;
+    if (j < 0 || j >= filmsData.length) return;
+    [filmsData[i], filmsData[j]] = [filmsData[j], filmsData[i]];
+    markDirty(); renderFilms();
+  }
+
+  function deleteFilm(i) {
+    if (!confirm(`Delete "${filmsData[i].title}"?`)) return;
+    filmsData.splice(i, 1);
+    markDirty(); renderFilms();
+  }
+
+  function addFilm() {
+    filmsData.unshift({ title: 'New Film', year: '', duration: '', genre: '', description: '', poster: '', videoUrl: '' });
+    markDirty(); renderFilms();
+    document.querySelector('#filmsList .entry-card')?.querySelector('.entry-card-header')?.click();
+  }
+
+  /* ── TEAM ── */
+  function renderTeam() {
+    const list = document.getElementById('teamList');
+    if (!teamData.length) { list.innerHTML = '<div class="empty-state">No team members yet. Add one above.</div>'; return; }
+    list.innerHTML = '';
+    teamData.forEach((member, i) => list.appendChild(teamCard(member, i)));
+  }
+
+  function teamCard(member, i) {
+    const div = document.createElement('div');
+    div.className = 'entry-card';
+    div.innerHTML = `
+      <div class="entry-card-header" onclick="toggleCard(this)">
+        <span class="drag-handle">⠿</span>
+        ${member.photo
+          ? `<img class="team-thumb" src="${member.photo}" alt="">`
+          : `<div class="entry-thumb-placeholder">👤</div>`}
+        <div class="entry-card-meta">
+          <div class="entry-card-title">${member.name || 'New Member'}</div>
+          <div class="entry-card-sub">${member.role || '—'}</div>
+        </div>
+        <div class="entry-card-actions" onclick="event.stopPropagation()">
+          <button class="icon-btn" title="Move up" onclick="moveMember(${i}, -1)">↑</button>
+          <button class="icon-btn" title="Move down" onclick="moveMember(${i}, 1)">↓</button>
+          <button class="icon-btn delete" title="Delete" onclick="deleteMember(${i})">✕</button>
+        </div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="entry-form">
+        <div class="form-grid">
+          <div>
+            <label class="field-label">Name</label>
+            <input class="field-input" value="${esc(member.name)}" onchange="updateMember(${i}, 'name', this.value)">
+          </div>
+          <div>
+            <label class="field-label">Role</label>
+            <input class="field-input" value="${esc(member.role)}" onchange="updateMember(${i}, 'role', this.value)">
+          </div>
+          <div class="form-full">
+            <label class="field-label">Bio</label>
+            <textarea class="field-textarea" onchange="updateMember(${i}, 'bio', this.value)">${esc(member.bio)}</textarea>
+          </div>
+          <div class="form-full">
+            <label class="field-label">Photo URL (Cloudinary)</label>
+            <input class="field-input" value="${esc(member.photo)}" onchange="updateMember(${i}, 'photo', this.value)">
+            <p class="field-hint">Upload photo to Cloudinary, paste the URL here.</p>
+          </div>
+        </div>
+      </div>
+    `;
+    return div;
+  }
+
+  function updateMember(i, key, val) {
+    teamData[i][key] = val;
+    markDirty();
+    const cards = document.querySelectorAll('#teamList .entry-card');
+    if (cards[i]) {
+      if (key === 'name') cards[i].querySelector('.entry-card-title').textContent = val || 'New Member';
+      if (key === 'role') cards[i].querySelector('.entry-card-sub').textContent = val || '—';
+    }
+  }
+
+  function moveMember(i, dir) {
+    const j = i + dir;
+    if (j < 0 || j >= teamData.length) return;
+    [teamData[i], teamData[j]] = [teamData[j], teamData[i]];
+    markDirty(); renderTeam();
+  }
+
+  function deleteMember(i) {
+    if (!confirm(`Delete "${teamData[i].name}"?`)) return;
+    teamData.splice(i, 1);
+    markDirty(); renderTeam();
+  }
+
+  function addMember() {
+    teamData.unshift({ name: 'New Member', role: '', bio: '', photo: '' });
+    markDirty(); renderTeam();
+    document.querySelector('#teamList .entry-card')?.querySelector('.entry-card-header')?.click();
+  }
+
+  /* ── HELPERS ── */
+  function toggleCard(header) {
+    header.parentElement.classList.toggle('open');
+  }
+
+  function esc(str) {
+    if (!str) return '';
+    return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+</script>
 </body>
 </html>
