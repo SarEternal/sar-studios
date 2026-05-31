@@ -344,7 +344,8 @@
       return;
     }
     ghToken = token;
-    sessionStorage.setItem('sar_token', token);
+    localStorage.setItem('sar_token', token);
+    localStorage.setItem('sar_authed', '1');
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminScreen').style.display = 'block';
     loadData();
@@ -354,14 +355,22 @@
   document.getElementById('tokenInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 
   function logout() {
-    sessionStorage.removeItem('sar_token');
+    localStorage.removeItem('sar_authed');
     location.reload();
   }
 
-  /* Auto-restore token from session */
+  /* Auto-login if previously authenticated on this device */
   window.addEventListener('load', () => {
-    const t = sessionStorage.getItem('sar_token');
-    if (t) { document.getElementById('tokenInput').value = t; }
+    const t = localStorage.getItem('sar_token');
+    const authed = localStorage.getItem('sar_authed');
+    if (t && authed) {
+      ghToken = t;
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminScreen').style.display = 'block';
+      loadData();
+    } else if (t) {
+      document.getElementById('tokenInput').value = t;
+    }
   });
 
   /* ── TABS ── */
