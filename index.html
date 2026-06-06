@@ -8,101 +8,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --red: #E8230A;
-    --yellow: #F5C800;
-    --black: #0A0A0A;
-    --offwhite: #F0EBE1;
-    --grey: #1A1A1A;
-  }
+  :root { --red: #E8230A; --yellow: #F5C800; --black: #0A0A0A; --offwhite: #F0EBE1; --grey: #1A1A1A; }
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--black);
-    color: var(--offwhite);
-    font-family: 'Space Mono', monospace;
-    overflow-x: hidden;
-  }
+  body { background: var(--black); color: var(--offwhite); font-family: 'Space Mono', monospace; overflow-x: hidden; }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 24px 48px;
-    background: rgba(10,10,10,0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; background: rgba(10,10,10,0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
   .nav-logo img { height: 40px; width: auto; display: block; }
   .nav-right { display: flex; align-items: center; gap: 36px; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    color: var(--offwhite); text-decoration: none;
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    transition: color 0.2s;
-  }
+  .nav-links a { color: var(--offwhite); text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--yellow); }
-
-  .lang-toggle {
-    display: flex; align-items: center; gap: 4px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 20px; padding: 4px;
-  }
-  .lang-btn {
-    background: none; border: none;
-    color: var(--offwhite); font-family: 'Space Mono', monospace;
-    font-size: 10px; letter-spacing: 2px;
-    padding: 4px 10px; border-radius: 16px;
-    cursor: pointer; transition: all 0.2s; opacity: 0.4;
-  }
+  .lang-toggle { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.08); border-radius: 20px; padding: 4px; }
+  .lang-btn { background: none; border: none; color: var(--offwhite); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; padding: 4px 10px; border-radius: 16px; cursor: pointer; transition: all 0.2s; opacity: 0.4; }
   .lang-btn.active { background: var(--yellow); color: var(--black); opacity: 1; }
 
-  #home {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    position: relative; overflow: hidden;
-  }
-  .hero-left {
-    background: var(--red);
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 120px 48px 80px; position: relative; overflow: hidden;
-    animation: fadeUp 0.9s ease both;
-  }
+  #home { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+  .hero-left { background: var(--red); display: flex; flex-direction: column; justify-content: center; padding: 120px 48px 80px; position: relative; overflow: hidden; animation: fadeUp 0.9s ease both; }
   .hero-tag { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--black); margin-bottom: 16px; opacity: 0.7; }
   .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 8vw, 120px); line-height: 0.9; color: var(--black); margin-bottom: 32px; }
   .hero-desc { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 18px; color: var(--black); opacity: 0.85; max-width: 360px; line-height: 1.6; }
-  .hero-right {
-    background: var(--black);
-    display: flex; flex-direction: column; justify-content: center;
-    align-items: flex-start; padding: 80px 48px; position: relative;
-    animation: fadeUp 0.9s 0.15s ease both;
-  }
-  .hero-right::after {
-    content: '';
-    position: absolute; bottom: 0; right: 0;
-    width: 200px; height: 200px; background: var(--yellow);
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  }
+  .hero-right { background: var(--black); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 80px 48px; position: relative; animation: fadeUp 0.9s 0.15s ease both; }
+  .hero-right::after { content: ''; position: absolute; bottom: 0; right: 0; width: 200px; height: 200px; background: var(--yellow); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
   .hero-year { font-family: 'Bebas Neue', sans-serif; font-size: 160px; color: var(--grey); line-height: 1; margin-bottom: 24px; }
   .hero-since { font-size: 11px; letter-spacing: 3px; color: var(--yellow); text-transform: uppercase; margin-bottom: 8px; }
   .hero-stat { font-family: 'DM Serif Display', serif; font-size: 22px; line-height: 1.4; }
-  .scroll-hint {
-    position: absolute; bottom: 48px; left: 48px;
-    font-size: 10px; letter-spacing: 3px; color: var(--offwhite);
-    opacity: 0.4; text-transform: uppercase;
-    display: flex; align-items: center; gap: 12px;
-  }
+  .scroll-hint { position: absolute; bottom: 48px; left: 48px; font-size: 10px; letter-spacing: 3px; color: var(--offwhite); opacity: 0.4; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
   .scroll-hint::before { content: ''; display: block; width: 40px; height: 1px; background: var(--offwhite); opacity: 0.4; }
 
-  #about {
-    background: var(--yellow); color: var(--black);
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center; padding: 120px 48px;
-  }
-  .section-label {
-    font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
-    margin-bottom: 48px; display: flex; align-items: center; gap: 16px;
-  }
+  #about { background: var(--yellow); color: var(--black); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 120px 48px; }
+  .section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 48px; display: flex; align-items: center; gap: 16px; }
   .section-label.dark { color: var(--black); }
   .section-label.dark::after { background: var(--black); opacity: 0.3; }
   .section-label.light { color: var(--red); }
@@ -115,140 +49,136 @@
   .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; }
   .stat-text { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-top: 4px; }
 
-  /* ─── FILMS ─────────────────────────────── */
+  /* FILMS */
   #films { background: var(--black); padding: 120px 48px; }
   .section-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 5vw, 80px); margin-bottom: 64px; }
   .films-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
-
   .film-card { position: relative; overflow: hidden; aspect-ratio: 2/3; background: var(--grey); cursor: pointer; }
   .film-poster { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block; }
-
-  /* Scale poster on hover (desktop) or .active (mobile) */
-  .film-card:hover .film-poster,
-  .film-card.active .film-poster { transform: scale(1.05); }
-
-  .film-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-  }
-
-  /* Info panel — title+meta always visible at bottom, desc hidden under */
-  .film-info {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 0 28px 28px;
-  }
-  .film-info-static {
-    /* always visible */
-    padding-top: 48px;
-  }
+  .film-card:hover .film-poster, .film-card.active .film-poster { transform: scale(1.05); }
+  .film-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%); }
+  .film-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 0 28px 28px; }
+  .film-info-static { padding-top: 48px; }
   .film-genre { font-size: 9px; letter-spacing: 3px; color: var(--red); text-transform: uppercase; margin-bottom: 8px; }
   .film-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--offwhite); margin-bottom: 6px; }
   .film-meta { font-size: 11px; color: var(--offwhite); opacity: 0.5; letter-spacing: 2px; }
-
-  /* Description: hidden by default, revealed on hover/active */
-  .film-desc-wrap {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-  }
-  .film-card:hover .film-desc-wrap,
-  .film-card.active .film-desc-wrap { max-height: 120px; }
-
+  .film-desc-wrap { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .film-card:hover .film-desc-wrap, .film-card.active .film-desc-wrap { max-height: 120px; }
   .film-desc { font-size: 11px; line-height: 1.7; color: var(--offwhite); opacity: 0.7; padding-top: 10px; }
-
-  /* Play button */
-  .film-play-btn {
-    position: absolute; top: 20px; right: 20px;
-    width: 48px; height: 48px;
-    background: var(--yellow); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.3s;
-    text-decoration: none;
-    z-index: 3;
-  }
-  .film-card:hover .film-play-btn,
-  .film-card.active .film-play-btn { opacity: 1; }
+  .film-play-btn { position: absolute; top: 20px; right: 20px; width: 48px; height: 48px; background: var(--yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; text-decoration: none; z-index: 3; }
+  .film-card:hover .film-play-btn, .film-card.active .film-play-btn { opacity: 1; }
   .film-play-btn svg { width: 18px; height: 18px; fill: var(--black); margin-left: 3px; }
-
-  /* ─── WARNING BADGE ──────────────────────── */
-  .film-warning {
-    position: absolute; top: 20px; left: 20px;
-    width: 32px; height: 32px;
-    background: rgba(0,0,0,0.7);
-    border: 1px solid rgba(245,200,0,0.4);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    cursor: pointer;
-    z-index: 4;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .film-warning .tooltip {
-    position: absolute;
-    top: 40px; left: 0;
-    background: var(--black);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--offwhite);
-    font-size: 10px;
-    letter-spacing: 1px;
-    line-height: 1.6;
-    padding: 10px 12px;
-    border-radius: 4px;
-    width: 200px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    white-space: normal;
-  }
-  /* Desktop: hover shows tooltip */
-  @media (hover: hover) {
-    .film-warning:hover .tooltip { opacity: 1; }
-  }
-  /* Mobile: .tooltip-open class shows tooltip */
+  .film-warning { position: absolute; top: 20px; left: 20px; width: 32px; height: 32px; background: rgba(0,0,0,0.7); border: 1px solid rgba(245,200,0,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; z-index: 4; -webkit-tap-highlight-color: transparent; }
+  .film-warning .tooltip { position: absolute; top: 40px; left: 0; background: var(--black); border: 1px solid rgba(255,255,255,0.1); color: var(--offwhite); font-size: 10px; letter-spacing: 1px; line-height: 1.6; padding: 10px 12px; border-radius: 4px; width: 200px; opacity: 0; pointer-events: none; transition: opacity 0.2s; white-space: normal; }
+  @media (hover: hover) { .film-warning:hover .tooltip { opacity: 1; } }
   .film-warning.tooltip-open .tooltip { opacity: 1; }
+  .films-empty { grid-column: 1 / -1; padding: 80px; text-align: center; background: var(--grey); font-family: 'DM Serif Display', serif; font-style: italic; font-size: 20px; opacity: 0.4; }
 
-  .films-empty {
-    grid-column: 1 / -1; padding: 80px; text-align: center;
-    background: var(--grey);
-    font-family: 'DM Serif Display', serif; font-style: italic;
-    font-size: 20px; opacity: 0.4;
-  }
+  /* REVIEWS SECTION */
+  #reviews { background: #0f0f0f; padding: 120px 48px; }
+  .reviews-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; flex-wrap: wrap; gap: 24px; }
+  .leave-review-btn { background: var(--red); color: var(--offwhite); font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; border: none; padding: 14px 32px; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; white-space: nowrap; }
+  .leave-review-btn:hover { opacity: 0.85; }
 
-  /* ─── TEAM ───────────────────────────────── */
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .review-card { background: var(--grey); padding: 28px; position: relative; }
+  .review-film-thumb { width: 36px; height: 52px; object-fit: cover; border-radius: 1px; flex-shrink: 0; }
+  .review-film-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .review-film-info { min-width: 0; }
+  .review-film-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .review-film-genre { font-size: 9px; letter-spacing: 2px; color: var(--red); text-transform: uppercase; margin-top: 2px; }
+  .review-stars { display: flex; gap: 2px; margin-bottom: 14px; }
+  .star { font-size: 14px; line-height: 1; }
+  .star.full { color: var(--yellow); }
+  .star.half { color: var(--yellow); opacity: 0.5; }
+  .star.empty { color: rgba(255,255,255,0.15); }
+  .review-text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 14px; line-height: 1.7; opacity: 0.75; margin-bottom: 16px; }
+  .review-author-row { display: flex; align-items: center; gap: 8px; }
+  .review-author { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; }
+  .review-badge { font-size: 9px; letter-spacing: 1px; padding: 3px 8px; border-radius: 2px; text-transform: uppercase; font-weight: 700; }
+  .badge-current { background: var(--yellow); color: var(--black); }
+  .badge-past { background: rgba(255,255,255,0.1); color: var(--offwhite); border: 1px solid rgba(255,255,255,0.2); }
+  .reviews-empty { grid-column: 1 / -1; padding: 80px; text-align: center; font-family: 'DM Serif Display', serif; font-style: italic; font-size: 20px; opacity: 0.3; }
+
+  /* MODAL REVIEWS */
+  .modal-reviews { margin-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; }
+  .modal-reviews-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .modal-reviews-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; }
+  .modal-leave-review-btn { background: none; border: 1px solid rgba(255,255,255,0.15); color: var(--offwhite); font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 7px 14px; cursor: pointer; border-radius: 2px; transition: all 0.2s; }
+  .modal-leave-review-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+  .modal-reviews-list { display: flex; flex-direction: column; gap: 16px; max-height: 280px; overflow-y: auto; padding-right: 4px; }
+  .modal-reviews-list::-webkit-scrollbar { width: 3px; }
+  .modal-reviews-list::-webkit-scrollbar-track { background: transparent; }
+  .modal-reviews-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .modal-review-item { background: rgba(255,255,255,0.04); padding: 16px; border-radius: 2px; border-left: 2px solid rgba(255,255,255,0.06); }
+  .modal-review-item .review-stars { margin-bottom: 8px; }
+  .modal-review-item .review-text { font-size: 13px; margin-bottom: 10px; }
+  .modal-review-item .review-author-row { gap: 6px; }
+  .modal-reviews-none { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 14px; opacity: 0.3; text-align: center; padding: 24px 0; }
+
+  /* REVIEW FORM MODAL */
+  .review-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .review-modal-overlay.open { display: flex; }
+  .review-modal-box { background: var(--grey); width: 100%; max-width: 560px; border-radius: 2px; overflow: hidden; }
+  .review-modal-header { background: var(--black); padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .review-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; }
+  .review-modal-close { background: none; border: none; color: var(--offwhite); font-size: 18px; cursor: pointer; opacity: 0.4; transition: opacity 0.2s; line-height: 1; }
+  .review-modal-close:hover { opacity: 1; }
+  .review-modal-body { padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* Film picker */
+  .film-picker-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; margin-bottom: 10px; display: block; }
+  .film-picker-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .film-pick-card { cursor: pointer; border-radius: 2px; overflow: hidden; position: relative; aspect-ratio: 2/3; border: 2px solid transparent; transition: border-color 0.2s; }
+  .film-pick-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .film-pick-card .pick-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); transition: background 0.2s; display: flex; align-items: flex-end; padding: 6px; }
+  .film-pick-card .pick-title { font-family: 'Bebas Neue', sans-serif; font-size: 11px; line-height: 1.2; color: var(--offwhite); }
+  .film-pick-card.selected { border-color: var(--yellow); }
+  .film-pick-card.selected .pick-overlay { background: rgba(245,200,0,0.15); }
+
+  /* Star picker */
+  .star-picker { display: flex; gap: 6px; align-items: center; }
+  .star-pick { font-size: 28px; cursor: pointer; color: rgba(255,255,255,0.15); transition: color 0.15s; line-height: 1; user-select: none; }
+  .star-pick.active { color: var(--yellow); }
+  .star-rating-display { font-size: 11px; letter-spacing: 2px; opacity: 0.4; margin-left: 8px; }
+
+  /* Form fields */
+  .review-field-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; margin-bottom: 6px; display: block; }
+  .review-field-input, .review-field-textarea { width: 100%; background: var(--black); border: 1px solid rgba(255,255,255,0.08); color: var(--offwhite); font-family: 'Space Mono', monospace; font-size: 12px; padding: 12px 14px; border-radius: 2px; outline: none; transition: border-color 0.2s; }
+  .review-field-input:focus, .review-field-textarea:focus { border-color: var(--yellow); }
+  .review-field-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  .review-submit-btn { width: 100%; background: var(--red); color: var(--offwhite); font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; border: none; padding: 16px; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; }
+  .review-submit-btn:hover { opacity: 0.85; }
+  .review-submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .review-error { font-size: 10px; letter-spacing: 1px; color: var(--red); display: none; }
+  .review-success { font-size: 11px; letter-spacing: 1px; color: #4CAF50; display: none; text-align: center; padding: 8px 0; }
+
+  /* TEAM */
   #team { background: var(--grey); padding: 120px 48px; }
   .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
   .team-card { background: var(--black); position: relative; overflow: hidden; transition: background 0.3s; cursor: pointer; -webkit-tap-highlight-color: transparent; }
   .team-photo-wrap { aspect-ratio: 3/4; overflow: hidden; }
   .team-photo { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.1); transition: filter 0.4s ease, transform 0.6s ease; display: block; }
-
-  /* hover (desktop) or .active (mobile) */
-  .team-card:hover .team-photo,
-  .team-card.active .team-photo { filter: grayscale(0%); transform: scale(1.05); }
-
+  .team-card:hover .team-photo, .team-card.active .team-photo { filter: grayscale(0%); transform: scale(1.05); }
   .team-info { padding: 24px 20px 28px; position: relative; transition: background 0.3s; }
   .team-info::before { content: attr(data-num); position: absolute; top: -28px; right: 12px; font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: rgba(255,255,255,0.05); line-height: 1; }
   .team-role { font-size: 9px; letter-spacing: 3px; color: var(--yellow); text-transform: uppercase; margin-bottom: 8px; transition: color 0.3s; }
   .team-name { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 10px; }
   .team-bio { font-size: 10px; line-height: 1.8; opacity: 0.5; transition: opacity 0.3s; }
+  .team-card:hover .team-info, .team-card.active .team-info { background: var(--red); }
+  .team-card:hover .team-role, .team-card.active .team-role { color: var(--black); }
+  .team-card:hover .team-bio, .team-card.active .team-bio { opacity: 0.8; }
 
-  .team-card:hover .team-info,
-  .team-card.active .team-info { background: var(--red); }
-  .team-card:hover .team-role,
-  .team-card.active .team-role { color: var(--black); }
-  .team-card:hover .team-bio,
-  .team-card.active .team-bio { opacity: 0.8; }
-
-  /* ─── CONTACT / FOOTER ───────────────────── */
+  /* CONTACT */
   #contact { background: var(--red); color: var(--black); text-align: center; padding: 120px 48px; position: relative; overflow: hidden; }
   #contact::before { content: 'KONTAKT'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Bebas Neue', sans-serif; font-size: 200px; color: rgba(0,0,0,0.06); white-space: nowrap; pointer-events: none; }
   .contact-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; opacity: 0.6; margin-bottom: 24px; }
   .contact-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 7vw, 100px); line-height: 0.95; margin-bottom: 48px; }
   .contact-email { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 24px; color: var(--black); text-decoration: none; border-bottom: 2px solid var(--black); padding-bottom: 4px; transition: opacity 0.2s; }
   .contact-email:hover { opacity: 0.6; }
-
   footer { background: var(--black); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 2px; color: var(--offwhite); opacity: 0.3; text-transform: uppercase; }
 
-  /* ─── MODAL ──────────────────────────────── */
+  /* FILM MODAL */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: none; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 80px 20px 40px; }
   .modal-overlay.open { display: flex; }
   .modal-inner { position: relative; width: 90vw; max-width: 1000px; }
@@ -261,48 +191,14 @@
   .modal-info-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--offwhite); margin-bottom: 6px; }
   .modal-info-meta { font-size: 11px; color: var(--offwhite); opacity: 0.4; letter-spacing: 2px; margin-bottom: 16px; }
   .modal-info-desc { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--offwhite); opacity: 0.7; line-height: 1.6; }
-
-  /* Disclaimer banner inside modal */
-  .modal-disclaimer {
-    display: flex; align-items: flex-start; gap: 12px;
-    margin-top: 20px;
-    padding: 14px 16px;
-    background: rgba(245,200,0,0.07);
-    border: 1px solid rgba(245,200,0,0.25);
-    border-left: 3px solid var(--yellow);
-    border-radius: 2px;
-  }
+  .modal-disclaimer { display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; padding: 14px 16px; background: rgba(245,200,0,0.07); border: 1px solid rgba(245,200,0,0.25); border-left: 3px solid var(--yellow); border-radius: 2px; }
   .modal-disclaimer-icon { font-size: 15px; line-height: 1; flex-shrink: 0; margin-top: 1px; }
   .modal-disclaimer-text { font-size: 10px; letter-spacing: 1px; line-height: 1.7; color: var(--offwhite); opacity: 0.6; }
-  .modal-disclaimer-label {
-    display: block; font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--yellow); opacity: 1; margin-bottom: 4px;
-  }
-
-  /* Version toggle */
-  .modal-version-toggle {
-    display: flex; align-items: center; gap: 0;
-    margin-top: 16px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 3px;
-    overflow: hidden;
-    width: fit-content;
-  }
-  .version-btn {
-    background: none; border: none;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--offwhite); opacity: 0.4;
-    padding: 8px 18px; cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-  }
+  .modal-disclaimer-label { display: block; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--yellow); opacity: 1; margin-bottom: 4px; }
+  .modal-version-toggle { display: flex; align-items: center; margin-top: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; width: fit-content; }
+  .version-btn { background: none; border: none; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--offwhite); opacity: 0.4; padding: 8px 18px; cursor: pointer; transition: all 0.2s; position: relative; }
   .version-btn.active { background: var(--yellow); color: var(--black); opacity: 1; }
-  .version-btn:not(:last-child)::after {
-    content: ''; position: absolute; right: 0; top: 20%; height: 60%;
-    width: 1px; background: rgba(255,255,255,0.1);
-  }
+  .version-btn:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: rgba(255,255,255,0.1); }
   .version-btn.active::after { display: none; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
@@ -317,10 +213,17 @@
     .hero-right::after { width: 100px; height: 100px; }
     #about { grid-template-columns: 1fr; padding: 80px 24px; }
     .films-grid { grid-template-columns: 1fr 1fr; }
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+    .film-picker-grid { grid-template-columns: repeat(4, 1fr); }
     .team-grid { grid-template-columns: 1fr 1fr; }
-    #films, #team, #contact { padding: 80px 24px; }
+    #films, #reviews, #team, #contact { padding: 80px 24px; }
+    .reviews-header { flex-direction: column; align-items: flex-start; }
   }
-  @media (max-width: 500px) { .films-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 500px) {
+    .films-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .film-picker-grid { grid-template-columns: repeat(3, 1fr); }
+  }
 </style>
 </head>
 <body>
@@ -331,6 +234,7 @@
     <ul class="nav-links">
       <li><a href="#about" data-pl="O nas" data-en="About">O nas</a></li>
       <li><a href="#films" data-pl="Filmy" data-en="Films">Filmy</a></li>
+      <li><a href="#reviews" data-pl="Recenzje" data-en="Reviews">Recenzje</a></li>
       <li><a href="#team" data-pl="Zespół" data-en="Team">Zespół</a></li>
       <li><a href="#contact" data-pl="Kontakt" data-en="Contact">Kontakt</a></li>
     </ul>
@@ -378,17 +282,24 @@
 <section id="films">
   <p class="section-label light" data-pl="Nasze prace" data-en="Our work">Nasze prace</p>
   <h2 class="section-heading" data-pl="Filmy." data-en="The Films.">Filmy.</h2>
-  <div class="films-grid" id="filmsGrid">
-    <div class="films-empty">Ładowanie filmów...</div>
+  <div class="films-grid" id="filmsGrid"><div class="films-empty">Ładowanie filmów...</div></div>
+</section>
+
+<section id="reviews">
+  <div class="reviews-header">
+    <div>
+      <p class="section-label light" data-pl="Opinie widzów" data-en="Audience reviews">Opinie widzów</p>
+      <h2 class="section-heading" data-pl="Recenzje." data-en="Reviews.">Recenzje.</h2>
+    </div>
+    <button class="leave-review-btn" onclick="openReviewForm(null)" data-pl="+ Zostaw recenzję" data-en="+ Leave a review">+ Zostaw recenzję</button>
   </div>
+  <div class="reviews-grid" id="reviewsGrid"><div class="reviews-empty" data-pl="Brak recenzji. Bądź pierwszy!" data-en="No reviews yet. Be the first!">Brak recenzji. Bądź pierwszy!</div></div>
 </section>
 
 <section id="team">
   <p class="section-label light" data-pl="Ekipa" data-en="The crew">Ekipa</p>
   <h2 class="section-heading" data-pl="Nasz Zespół." data-en="Core Team.">Nasz Zespół.</h2>
-  <div class="team-grid" id="teamGrid">
-    <div class="team-empty">Ładowanie zespołu...</div>
-  </div>
+  <div class="team-grid" id="teamGrid"><div class="team-empty">Ładowanie zespołu...</div></div>
 </section>
 
 <section id="contact">
@@ -402,6 +313,7 @@
   <span data-pl="Niezależna Produkcja Filmowa" data-en="Independent Film Production">Niezależna Produkcja Filmowa</span>
 </footer>
 
+<!-- FILM MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal-inner">
     <button class="modal-close" id="modalClose">✕ Zamknij</button>
@@ -410,87 +322,153 @@
   </div>
 </div>
 
+<!-- REVIEW FORM MODAL -->
+<div class="review-modal-overlay" id="reviewModal">
+  <div class="review-modal-box">
+    <div class="review-modal-header">
+      <span class="review-modal-title" data-pl="Zostaw Recenzję" data-en="Leave a Review">Zostaw Recenzję</span>
+      <button class="review-modal-close" onclick="closeReviewForm()">✕</button>
+    </div>
+    <div class="review-modal-body">
+      <div>
+        <span class="film-picker-label" data-pl="Wybierz film" data-en="Choose a film">Wybierz film</span>
+        <div class="film-picker-grid" id="filmPickerGrid"></div>
+      </div>
+      <div>
+        <span class="review-field-label" data-pl="Twoja ocena" data-en="Your rating">Twoja ocena</span>
+        <div class="star-picker" id="starPicker">
+          <span class="star-pick" data-val="1">★</span>
+          <span class="star-pick" data-val="1.5">½</span>
+          <span class="star-pick" data-val="2">★</span>
+          <span class="star-pick" data-val="2.5">½</span>
+          <span class="star-pick" data-val="3">★</span>
+          <span class="star-pick" data-val="3.5">½</span>
+          <span class="star-pick" data-val="4">★</span>
+          <span class="star-pick" data-val="4.5">½</span>
+          <span class="star-pick" data-val="5">★</span>
+          <span class="star-rating-display" id="starDisplay">—</span>
+        </div>
+      </div>
+      <div>
+        <label class="review-field-label" data-pl="Twoje imię" data-en="Your name">Twoje imię</label>
+        <input class="review-field-input" id="reviewName" type="text" maxlength="60">
+      </div>
+      <div>
+        <label class="review-field-label" data-pl="Twoja recenzja" data-en="Your review">Twoja recenzja</label>
+        <textarea class="review-field-textarea" id="reviewText" maxlength="500"></textarea>
+      </div>
+      <div class="review-error" id="reviewError"></div>
+      <div class="review-success" id="reviewSuccess" data-pl="Recenzja dodana! Pojawi się za chwilę." data-en="Review submitted! It'll appear shortly.">Recenzja dodana! Pojawi się za chwilę.</div>
+      <button class="review-submit-btn" id="reviewSubmitBtn" onclick="submitReview()" data-pl="OPUBLIKUJ RECENZJĘ" data-en="PUBLISH REVIEW">OPUBLIKUJ RECENZJĘ</button>
+    </div>
+  </div>
+</div>
+
 <script>
+  const REPO = 'SarEternal/sar-studios';
   const WARNING_FILMS = ['Po Drugiej Stronie', 'Rozmówca'];
   const WARNING_TEXT_PL = 'Jeden z pierwszych filmów studia. Jakość może być niższa niż w nowszych produkcjach.';
   const WARNING_TEXT_EN = "One of the studio's first films. Quality may be lower than newer productions.";
 
   let currentLang = 'pl';
+  let allFilms = [];
+  let allReviews = [];
+  let reviewsSha = '';
+  let selectedFilm = null;
+  let selectedRating = 0;
 
+  /* ── LANG ── */
   function setLang(lang) {
     currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-    });
-    document.querySelectorAll('[data-pl]').forEach(el => {
-      el.innerHTML = el.getAttribute('data-' + lang);
-    });
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent === lang.toUpperCase()));
+    document.querySelectorAll('[data-pl]').forEach(el => el.innerHTML = el.getAttribute('data-' + lang));
     document.getElementById('modalClose').textContent = lang === 'pl' ? '✕ Zamknij' : '✕ Close';
-    document.querySelectorAll('.film-warning .tooltip').forEach(t => {
-      t.textContent = lang === 'pl' ? WARNING_TEXT_PL : WARNING_TEXT_EN;
-    });
+    document.querySelectorAll('.film-warning .tooltip').forEach(t => t.textContent = lang === 'pl' ? WARNING_TEXT_PL : WARNING_TEXT_EN);
   }
 
   function getYearsActive() {
-    const start = new Date(2022, 8, 1);
-    const now = new Date();
-    let years = now.getFullYear() - start.getFullYear();
-    if (now.getMonth() < start.getMonth()) years--;
-    return years;
+    const start = new Date(2022, 8, 1); const now = new Date();
+    let y = now.getFullYear() - start.getFullYear();
+    if (now.getMonth() < start.getMonth()) y--;
+    return y;
   }
-  document.querySelectorAll('.stat-num').forEach(el => {
-    if (el.textContent.trim() === '3+') el.textContent = getYearsActive() + '+';
-  });
+  document.querySelectorAll('.stat-num').forEach(el => { if (el.textContent.trim() === '3+') el.textContent = getYearsActive() + '+'; });
 
   function getYouTubeEmbed(url) {
-    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
-    return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : url;
+    const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+    return m ? `https://www.youtube.com/embed/${m[1]}?autoplay=1` : url;
   }
 
+  /* ── STARS RENDER ── */
+  function renderStars(rating) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) html += '<span class="star full">★</span>';
+      else if (rating >= i - 0.5) html += '<span class="star half">★</span>';
+      else html += '<span class="star empty">★</span>';
+    }
+    return html;
+  }
+
+  /* ── BADGE ── */
+  function badgeHtml(review) {
+    if (review.badge === 'current') return `<span class="review-badge badge-current" data-pl="Członek Ekipy" data-en="Crew Member">${currentLang === 'pl' ? 'Członek Ekipy' : 'Crew Member'}</span>`;
+    if (review.badge === 'past') return `<span class="review-badge badge-past" data-pl="Były Członek" data-en="Past Member">${currentLang === 'pl' ? 'Były Członek' : 'Past Member'}</span>`;
+    return '';
+  }
+
+  /* ── FILM MODAL ── */
   const modal = document.getElementById('modal');
   const modalVideo = document.getElementById('modalVideo');
   const modalInfo = document.getElementById('modalInfo');
 
-  function closeModal() {
-    modal.classList.remove('open');
-    modalVideo.innerHTML = '';
-    modalInfo.innerHTML = '';
-  }
+  function closeModal() { modal.classList.remove('open'); modalVideo.innerHTML = ''; modalInfo.innerHTML = ''; }
   document.getElementById('modalClose').addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 
-  function loadVideo(url) {
-    modalVideo.innerHTML = `<iframe src="${getYouTubeEmbed(url)}" allowfullscreen allow="autoplay"></iframe>`;
-  }
+  function loadVideo(url) { modalVideo.innerHTML = `<iframe src="${getYouTubeEmbed(url)}" allowfullscreen allow="autoplay"></iframe>`; }
 
   function openFilm(film) {
     const isWarning = WARNING_FILMS.includes(film.title);
     const hasVersions = !!film.originalUrl;
-
     loadVideo(film.videoUrl);
 
-    const disclaimerHtml = isWarning ? `
-      <div class="modal-disclaimer">
-        <span class="modal-disclaimer-icon">⚠️</span>
-        <span class="modal-disclaimer-text">
-          <span class="modal-disclaimer-label" data-pl="Uwaga" data-en="Note">Uwaga</span>
-          <span data-pl="${WARNING_TEXT_PL}" data-en="${WARNING_TEXT_EN}">${currentLang === 'pl' ? WARNING_TEXT_PL : WARNING_TEXT_EN}</span>
-        </span>
-      </div>` : '';
-
-    const versionToggleHtml = hasVersions ? `
-      <div class="modal-version-toggle" id="versionToggle">
-        <button class="version-btn active" data-url="${film.videoUrl}" data-pl="Remaster" data-en="Remaster">Remaster</button>
-        <button class="version-btn" data-url="${film.originalUrl}" data-pl="Oryginał" data-en="Original">Oryginał</button>
-      </div>` : '';
+    const filmReviews = allReviews.filter(r => r.filmTitle === film.title);
+    const reviewsHtml = filmReviews.length
+      ? filmReviews.map(r => `
+          <div class="modal-review-item">
+            <div class="review-stars">${renderStars(r.rating)}</div>
+            <p class="review-text">${escHtml(r.text)}</p>
+            <div class="review-author-row">
+              <span class="review-author">${escHtml(r.name)}</span>
+              ${badgeHtml(r)}
+            </div>
+          </div>`).join('')
+      : `<p class="modal-reviews-none" data-pl="Brak recenzji dla tego filmu." data-en="No reviews for this film yet.">${currentLang === 'pl' ? 'Brak recenzji dla tego filmu.' : 'No reviews for this film yet.'}</p>`;
 
     modalInfo.innerHTML = `
       <p class="modal-info-genre">${film.genre}</p>
       <p class="modal-info-title">${film.title}</p>
       <p class="modal-info-meta">${film.year} · ${film.duration}</p>
       <p class="modal-info-desc">${film.description}</p>
-      ${versionToggleHtml}
-      ${disclaimerHtml}
+      ${hasVersions ? `<div class="modal-version-toggle">
+        <button class="version-btn active" data-url="${film.videoUrl}" data-pl="Remaster" data-en="Remaster">Remaster</button>
+        <button class="version-btn" data-url="${film.originalUrl}" data-pl="Oryginał" data-en="Original">Oryginał</button>
+      </div>` : ''}
+      ${isWarning ? `<div class="modal-disclaimer">
+        <span class="modal-disclaimer-icon">⚠️</span>
+        <span class="modal-disclaimer-text">
+          <span class="modal-disclaimer-label">Uwaga</span>
+          <span>${currentLang === 'pl' ? WARNING_TEXT_PL : WARNING_TEXT_EN}</span>
+        </span>
+      </div>` : ''}
+      <div class="modal-reviews">
+        <div class="modal-reviews-header">
+          <span class="modal-reviews-title" data-pl="Recenzje" data-en="Reviews">${currentLang === 'pl' ? 'Recenzje' : 'Reviews'}</span>
+          <button class="modal-leave-review-btn" onclick="openReviewForm('${escAttr(film.title)}')" data-pl="+ Zostaw recenzję" data-en="+ Leave a review">${currentLang === 'pl' ? '+ Zostaw recenzję' : '+ Leave a review'}</button>
+        </div>
+        <div class="modal-reviews-list">${reviewsHtml}</div>
+      </div>
     `;
 
     if (hasVersions) {
@@ -506,55 +484,158 @@
     modal.classList.add('open');
   }
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+  /* ── REVIEW FORM ── */
+  function openReviewForm(preselectedTitle) {
+    selectedFilm = null; selectedRating = 0;
+    document.getElementById('reviewName').value = '';
+    document.getElementById('reviewText').value = '';
+    document.getElementById('reviewError').style.display = 'none';
+    document.getElementById('reviewSuccess').style.display = 'none';
+    document.getElementById('reviewSubmitBtn').disabled = false;
+    updateStarPicker(0);
+    buildFilmPicker(preselectedTitle);
+    document.getElementById('reviewModal').classList.add('open');
+  }
+
+  function closeReviewForm() { document.getElementById('reviewModal').classList.remove('open'); }
+  document.getElementById('reviewModal').addEventListener('click', e => { if (e.target === document.getElementById('reviewModal')) closeReviewForm(); });
+
+  function buildFilmPicker(preselectedTitle) {
+    const grid = document.getElementById('filmPickerGrid');
+    grid.innerHTML = '';
+    allFilms.forEach(film => {
+      const card = document.createElement('div');
+      card.className = 'film-pick-card' + (film.title === preselectedTitle ? ' selected' : '');
+      card.innerHTML = `
+        <img src="${film.poster}" alt="${film.title}" loading="lazy">
+        <div class="pick-overlay"><span class="pick-title">${film.title}</span></div>
+      `;
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.film-pick-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedFilm = film.title;
+      });
+      if (film.title === preselectedTitle) selectedFilm = film.title;
+      grid.appendChild(card);
     });
+  }
+
+  function updateStarPicker(val) {
+    selectedRating = val;
+    document.querySelectorAll('.star-pick').forEach(s => {
+      s.classList.toggle('active', parseFloat(s.dataset.val) <= val);
+    });
+    document.getElementById('starDisplay').textContent = val > 0 ? val + '/5' : '—';
+  }
+
+  document.querySelectorAll('.star-pick').forEach(s => {
+    s.addEventListener('click', () => updateStarPicker(parseFloat(s.dataset.val)));
+  });
+
+  async function submitReview() {
+    const name = document.getElementById('reviewName').value.trim();
+    const text = document.getElementById('reviewText').value.trim();
+    const errEl = document.getElementById('reviewError');
+    const successEl = document.getElementById('reviewSuccess');
+
+    if (!selectedFilm) { errEl.textContent = currentLang === 'pl' ? 'Wybierz film.' : 'Please select a film.'; errEl.style.display = 'block'; return; }
+    if (!selectedRating) { errEl.textContent = currentLang === 'pl' ? 'Wybierz ocenę.' : 'Please select a rating.'; errEl.style.display = 'block'; return; }
+    if (!name) { errEl.textContent = currentLang === 'pl' ? 'Podaj swoje imię.' : 'Please enter your name.'; errEl.style.display = 'block'; return; }
+    if (!text) { errEl.textContent = currentLang === 'pl' ? 'Napisz recenzję.' : 'Please write a review.'; errEl.style.display = 'block'; return; }
+    errEl.style.display = 'none';
+
+    const btn = document.getElementById('reviewSubmitBtn');
+    btn.disabled = true;
+
+    const newReview = { id: Date.now(), filmTitle: selectedFilm, rating: selectedRating, name, text, badge: null, date: new Date().toISOString().split('T')[0] };
+    const updatedReviews = [...allReviews, newReview];
+
+    try {
+      /* Get current SHA */
+      const shaRes = await fetch(`https://api.github.com/repos/${REPO}/contents/_data/reviews.json`);
+      const shaData = await shaRes.json();
+      const sha = shaData.sha;
+
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(updatedReviews, null, 2))));
+      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/_data/reviews.json`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `New review for ${selectedFilm} by ${name}`, content, sha })
+      });
+
+      if (!res.ok) throw new Error('Failed');
+      allReviews = updatedReviews;
+      renderReviews();
+      successEl.style.display = 'block';
+      successEl.innerHTML = successEl.getAttribute('data-' + currentLang);
+      setTimeout(() => closeReviewForm(), 2000);
+    } catch(e) {
+      errEl.textContent = currentLang === 'pl' ? 'Błąd. Spróbuj ponownie.' : 'Error. Please try again.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+    }
+  }
+
+  /* ── RENDER REVIEWS ── */
+  function renderReviews() {
+    const grid = document.getElementById('reviewsGrid');
+    if (!allReviews.length) {
+      grid.innerHTML = `<div class="reviews-empty" data-pl="Brak recenzji. Bądź pierwszy!" data-en="No reviews yet. Be the first!">${currentLang === 'pl' ? 'Brak recenzji. Bądź pierwszy!' : 'No reviews yet. Be the first!'}</div>`;
+      return;
+    }
+    grid.innerHTML = '';
+    const sorted = [...allReviews].reverse();
+    sorted.forEach(r => {
+      const film = allFilms.find(f => f.title === r.filmTitle);
+      const card = document.createElement('div');
+      card.className = 'review-card';
+      card.innerHTML = `
+        <div class="review-film-row">
+          ${film ? `<img class="review-film-thumb" src="${film.poster}" alt="${r.filmTitle}">` : ''}
+          <div class="review-film-info">
+            <div class="review-film-title">${escHtml(r.filmTitle)}</div>
+            ${film ? `<div class="review-film-genre">${film.genre}</div>` : ''}
+          </div>
+        </div>
+        <div class="review-stars">${renderStars(r.rating)}</div>
+        <p class="review-text">${escHtml(r.text)}</p>
+        <div class="review-author-row">
+          <span class="review-author">${escHtml(r.name)}</span>
+          ${badgeHtml(r)}
+        </div>
+      `;
+      grid.appendChild(card);
+      revealOnScroll(card);
+    });
+  }
+
+  /* ── SCROLL REVEAL ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
   }, { threshold: 0.1 });
 
   function revealOnScroll(el) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
+    el.style.opacity = '0'; el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   }
 
-  /* ─── TOUCH: detect touch device ─── */
+  /* ── TOUCH ── */
   const isTouch = () => window.matchMedia('(hover: none)').matches;
+  function closeOtherFilmCards(except) { document.querySelectorAll('.film-card.active').forEach(c => { if (c !== except) c.classList.remove('active'); }); }
+  function closeOtherTooltips(except) { document.querySelectorAll('.film-warning.tooltip-open').forEach(w => { if (w !== except) w.classList.remove('tooltip-open'); }); }
 
-  /* Close all open film cards except the given one */
-  function closeOtherFilmCards(except) {
-    document.querySelectorAll('.film-card.active').forEach(c => {
-      if (c !== except) c.classList.remove('active');
-    });
-  }
-
-  /* Close all open tooltips except the given one */
-  function closeOtherTooltips(except) {
-    document.querySelectorAll('.film-warning.tooltip-open').forEach(w => {
-      if (w !== except) w.classList.remove('tooltip-open');
-    });
-  }
-
+  /* ── LOAD FILMS ── */
   async function loadFilms() {
     const grid = document.getElementById('filmsGrid');
     try {
       const res = await fetch('_data/films.json');
-      const films = await res.json();
-      if (!films.length) {
-        grid.innerHTML = `<div class="films-empty" data-pl="Brak filmów." data-en="No films yet.">Brak filmów.</div>`;
-        return;
-      }
+      allFilms = await res.json();
+      if (!allFilms.length) { grid.innerHTML = `<div class="films-empty">Brak filmów.</div>`; return; }
       grid.innerHTML = '';
-      films.forEach(film => {
-        const filmData = encodeURIComponent(JSON.stringify(film));
+      allFilms.forEach(film => {
         const isOld = WARNING_FILMS.includes(film.title);
-        const warningHtml = isOld ? `
-          <div class="film-warning">
-            ⚠️
-            <span class="tooltip">${currentLang === 'pl' ? WARNING_TEXT_PL : WARNING_TEXT_EN}</span>
-          </div>` : '';
-
+        const warningHtml = isOld ? `<div class="film-warning">⚠️<span class="tooltip">${currentLang === 'pl' ? WARNING_TEXT_PL : WARNING_TEXT_EN}</span></div>` : '';
         const card = document.createElement('div');
         card.className = 'film-card';
         card.innerHTML = `
@@ -570,111 +651,69 @@
               <p class="film-title">${film.title}</p>
               <p class="film-meta">${film.year} · ${film.duration}</p>
             </div>
-            <div class="film-desc-wrap">
-              <p class="film-desc">${film.description}</p>
-            </div>
+            <div class="film-desc-wrap"><p class="film-desc">${film.description}</p></div>
           </div>
         `;
-
-        /* Play button click — always open the film */
-        card.querySelector('.film-play-btn').addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-          openFilm(film);
-        });
-
-        /* Warning badge touch interaction */
+        card.querySelector('.film-play-btn').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); openFilm(film); });
         if (isOld) {
           const badge = card.querySelector('.film-warning');
-          badge.addEventListener('click', e => {
-            e.stopPropagation();
-            if (isTouch()) {
-              const isOpen = badge.classList.contains('tooltip-open');
-              closeOtherTooltips(badge);
-              badge.classList.toggle('tooltip-open', !isOpen);
-            }
-          });
+          badge.addEventListener('click', e => { e.stopPropagation(); if (isTouch()) { const o = badge.classList.contains('tooltip-open'); closeOtherTooltips(badge); badge.classList.toggle('tooltip-open', !o); } });
         }
-
-        /* Card tap on touch: toggle .active (reveals desc + play btn + color) */
         card.addEventListener('click', e => {
           if (!isTouch()) return;
-          /* Don't toggle if tapping warning badge or play btn */
           if (e.target.closest('.film-warning') || e.target.closest('.film-play-btn')) return;
           const isActive = card.classList.contains('active');
-          closeOtherFilmCards(card);
-          card.classList.toggle('active', !isActive);
+          closeOtherFilmCards(card); card.classList.toggle('active', !isActive);
         });
-
         grid.appendChild(card);
         revealOnScroll(card);
       });
-
-      /* Tapping outside any card closes them all */
-      document.addEventListener('click', e => {
-        if (!isTouch()) return;
-        if (!e.target.closest('.film-card')) {
-          closeOtherFilmCards(null);
-          closeOtherTooltips(null);
-        }
-      });
-
-    } catch(e) {
-      grid.innerHTML = '<div class="films-empty">Nie można załadować filmów.</div>';
-    }
+      document.addEventListener('click', e => { if (!isTouch()) return; if (!e.target.closest('.film-card')) { closeOtherFilmCards(null); closeOtherTooltips(null); } });
+    } catch(e) { grid.innerHTML = '<div class="films-empty">Nie można załadować filmów.</div>'; }
   }
 
+  /* ── LOAD REVIEWS ── */
+  async function loadReviews() {
+    try {
+      const res = await fetch('_data/reviews.json');
+      allReviews = await res.json();
+      renderReviews();
+    } catch(e) { allReviews = []; }
+  }
+
+  /* ── LOAD TEAM ── */
   async function loadTeam() {
     const grid = document.getElementById('teamGrid');
     try {
       const res = await fetch('_data/team.json');
       const team = await res.json();
-      if (!team.length) {
-        grid.innerHTML = '<div class="team-empty">Brak członków zespołu.</div>';
-        return;
-      }
+      if (!team.length) { grid.innerHTML = '<div class="team-empty">Brak członków zespołu.</div>'; return; }
       grid.innerHTML = '';
       team.forEach((member, i) => {
         const num = String(i + 1).padStart(2, '0');
         const card = document.createElement('div');
         card.className = 'team-card';
         card.innerHTML = `
-          <div class="team-photo-wrap">
-            <img class="team-photo" src="${member.photo}" alt="${member.name}" loading="lazy">
-          </div>
+          <div class="team-photo-wrap"><img class="team-photo" src="${member.photo}" alt="${member.name}" loading="lazy"></div>
           <div class="team-info" data-num="${num}">
             <p class="team-role">${member.role}</p>
             <p class="team-name">${member.name}</p>
             <p class="team-bio">${member.bio}</p>
           </div>
         `;
-
-        /* Team card tap on touch: toggle .active */
-        card.addEventListener('click', () => {
-          if (!isTouch()) return;
-          const isActive = card.classList.contains('active');
-          document.querySelectorAll('.team-card.active').forEach(c => c.classList.remove('active'));
-          card.classList.toggle('active', !isActive);
-        });
-
+        card.addEventListener('click', () => { if (!isTouch()) return; const a = card.classList.contains('active'); document.querySelectorAll('.team-card.active').forEach(c => c.classList.remove('active')); card.classList.toggle('active', !a); });
         grid.appendChild(card);
         revealOnScroll(card);
       });
-
-      /* Tapping outside any team card closes them */
-      document.addEventListener('click', e => {
-        if (!isTouch()) return;
-        if (!e.target.closest('.team-card')) {
-          document.querySelectorAll('.team-card.active').forEach(c => c.classList.remove('active'));
-        }
-      });
-
-    } catch(e) {
-      grid.innerHTML = '<div class="team-empty">Nie można załadować zespołu.</div>';
-    }
+      document.addEventListener('click', e => { if (!isTouch()) return; if (!e.target.closest('.team-card')) document.querySelectorAll('.team-card.active').forEach(c => c.classList.remove('active')); });
+    } catch(e) { grid.innerHTML = '<div class="team-empty">Nie można załadować zespołu.</div>'; }
   }
 
+  function escHtml(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function escAttr(s) { if (!s) return ''; return s.replace(/'/g, "\\'"); }
+
   loadFilms();
+  loadReviews();
   loadTeam();
 </script>
 </body>
