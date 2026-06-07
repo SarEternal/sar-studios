@@ -136,11 +136,23 @@
   .film-pick-card.selected { border-color: var(--yellow); }
   .film-pick-card.selected .pick-overlay { background: rgba(245,200,0,0.15); }
 
-  /* Star picker */
-  .star-picker { display: flex; gap: 6px; align-items: center; }
-  .star-pick { font-size: 28px; cursor: pointer; color: rgba(255,255,255,0.15); transition: color 0.15s; line-height: 1; user-select: none; }
-  .star-pick.active { color: var(--yellow); }
-  .star-rating-display { font-size: 11px; letter-spacing: 2px; opacity: 0.4; margin-left: 8px; }
+  /* Star picker — Letterboxd style */
+  .star-picker-wrap { position: relative; }
+  .star-picker-hint { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.3; margin-bottom: 8px; }
+  .star-picker { display: flex; gap: 0; align-items: center; cursor: pointer; width: fit-content; }
+  .star-pick-slot { position: relative; width: 32px; height: 36px; display: flex; align-items: center; justify-content: center; }
+  .star-pick-slot .s-full, .star-pick-slot .s-half {
+    position: absolute; font-size: 28px; line-height: 1;
+    color: rgba(255,255,255,0.12); transition: color 0.1s;
+    user-select: none; pointer-events: none;
+  }
+  .star-pick-slot .s-full { left: 0; width: 100%; text-align: center; }
+  .star-pick-slot .s-half { left: 0; width: 50%; overflow: hidden; text-align: left; }
+  .star-pick-slot.lit-full .s-full { color: var(--yellow); }
+  .star-pick-slot.lit-half .s-half { color: var(--yellow); }
+  .star-pick-slot.lit-half .s-full { color: rgba(255,255,255,0.12); }
+  .star-rating-display { font-size: 13px; letter-spacing: 1px; margin-left: 12px; color: var(--yellow); opacity: 0; transition: opacity 0.15s; min-width: 32px; }
+  .star-rating-display.visible { opacity: 1; }
 
   /* Form fields */
   .review-field-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; margin-bottom: 6px; display: block; }
@@ -336,17 +348,14 @@
       </div>
       <div>
         <span class="review-field-label" data-pl="Twoja ocena" data-en="Your rating">Twoja ocena</span>
+        <p class="star-picker-hint" data-pl="Przesuń po gwiazdkach — możesz dać pół gwiazdki" data-en="Hover over stars — half stars supported">Przesuń po gwiazdkach — możesz dać pół gwiazdki</p>
         <div class="star-picker" id="starPicker">
-          <span class="star-pick" data-val="1">★</span>
-          <span class="star-pick" data-val="1.5">½</span>
-          <span class="star-pick" data-val="2">★</span>
-          <span class="star-pick" data-val="2.5">½</span>
-          <span class="star-pick" data-val="3">★</span>
-          <span class="star-pick" data-val="3.5">½</span>
-          <span class="star-pick" data-val="4">★</span>
-          <span class="star-pick" data-val="4.5">½</span>
-          <span class="star-pick" data-val="5">★</span>
-          <span class="star-rating-display" id="starDisplay">—</span>
+          <div class="star-pick-slot" data-full="1" data-half="0.5"><span class="s-full">★</span><span class="s-half">★</span></div>
+          <div class="star-pick-slot" data-full="2" data-half="1.5"><span class="s-full">★</span><span class="s-half">★</span></div>
+          <div class="star-pick-slot" data-full="3" data-half="2.5"><span class="s-full">★</span><span class="s-half">★</span></div>
+          <div class="star-pick-slot" data-full="4" data-half="3.5"><span class="s-full">★</span><span class="s-half">★</span></div>
+          <div class="star-pick-slot" data-full="5" data-half="4.5"><span class="s-full">★</span><span class="s-half">★</span></div>
+          <span class="star-rating-display" id="starDisplay"></span>
         </div>
       </div>
       <div>
@@ -528,9 +537,39 @@
     document.getElementById('starDisplay').textContent = val > 0 ? val + '/5' : '—';
   }
 
-  document.querySelectorAll('.star-pick').forEach(s => {
-    s.addEventListener('click', () => updateStarPicker(parseFloat(s.dataset.val)));
+  /* Letterboxd-style star picker */
+  const starPicker = document.getElementById('starPicker');
+  const starDisplay = document.getElementById('starDisplay');
+
+  function getSlotValue(slot, e) {
+    const rect = slot.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    return x < rect.width / 2 ? parseFloat(slot.dataset.half) : parseFloat(slot.dataset.full);
+  }
+
+  function highlightStars(val) {
+    document.querySelectorAll('.star-pick-slot').forEach(slot => {
+      const full = parseFloat(slot.dataset.full);
+      const half = parseFloat(slot.dataset.half);
+      slot.classList.remove('lit-full', 'lit-half');
+      if (val >= full) slot.classList.add('lit-full');
+      else if (val >= half) slot.classList.add('lit-half');
+    });
+    if (val > 0) {
+      starDisplay.textContent = val + '/5';
+      starDisplay.classList.add('visible');
+    } else {
+      starDisplay.textContent = '';
+      starDisplay.classList.remove('visible');
+    }
+  }
+
+  document.querySelectorAll('.star-pick-slot').forEach(slot => {
+    slot.addEventListener('mousemove', e => highlightStars(getSlotValue(slot, e)));
+    slot.addEventListener('click', e => { selectedRating = getSlotValue(slot, e); highlightStars(selectedRating); });
+    slot.addEventListener('touchstart', e => { e.preventDefault(); const v = getSlotValue(slot, e); selectedRating = v; highlightStars(v); }, { passive: false });
   });
+  starPicker.addEventListener('mouseleave', () => highlightStars(selectedRating));
 
   async function submitReview() {
     const name = document.getElementById('reviewName').value.trim();
@@ -542,37 +581,50 @@
     if (!selectedRating) { errEl.textContent = currentLang === 'pl' ? 'Wybierz ocenę.' : 'Please select a rating.'; errEl.style.display = 'block'; return; }
     if (!name) { errEl.textContent = currentLang === 'pl' ? 'Podaj swoje imię.' : 'Please enter your name.'; errEl.style.display = 'block'; return; }
     if (!text) { errEl.textContent = currentLang === 'pl' ? 'Napisz recenzję.' : 'Please write a review.'; errEl.style.display = 'block'; return; }
-    errEl.style.display = 'none';
 
+    /* One review per film per name */
+    const duplicate = allReviews.find(r => r.filmTitle === selectedFilm && r.name.toLowerCase() === name.toLowerCase());
+    if (duplicate) {
+      errEl.textContent = currentLang === 'pl' ? 'Już zostawiłeś recenzję tego filmu.' : 'You already reviewed this film.';
+      errEl.style.display = 'block'; return;
+    }
+
+    errEl.style.display = 'none';
     const btn = document.getElementById('reviewSubmitBtn');
     btn.disabled = true;
+    btn.textContent = currentLang === 'pl' ? 'PUBLIKOWANIE...' : 'PUBLISHING...';
 
     const newReview = { id: Date.now(), filmTitle: selectedFilm, rating: selectedRating, name, text, badge: null, date: new Date().toISOString().split('T')[0] };
     const updatedReviews = [...allReviews, newReview];
 
     try {
-      /* Get current SHA */
-      const shaRes = await fetch(`https://api.github.com/repos/${REPO}/contents/_data/reviews.json`);
-      const shaData = await shaRes.json();
-      const sha = shaData.sha;
+      /* Get current SHA — handle case where file might not exist yet */
+      let sha = null;
+      try {
+        const shaRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/_data/reviews.json');
+        if (shaRes.ok) { const shaData = await shaRes.json(); sha = shaData.sha; }
+      } catch(e) { /* file doesn't exist yet, sha stays null */ }
 
-      const content = btoa(unescape(encodeURIComponent(JSON.stringify(updatedReviews, null, 2))));
-      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/_data/reviews.json`, {
+      const body = { message: 'New review for ' + selectedFilm + ' by ' + name, content: btoa(unescape(encodeURIComponent(JSON.stringify(updatedReviews, null, 2)))) };
+      if (sha) body.sha = sha;
+
+      const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/_data/reviews.json', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: `New review for ${selectedFilm} by ${name}`, content, sha })
+        body: JSON.stringify(body)
       });
 
-      if (!res.ok) throw new Error('Failed');
+      if (!res.ok) { const err = await res.json(); throw new Error(err.message || 'Failed'); }
       allReviews = updatedReviews;
       renderReviews();
       successEl.style.display = 'block';
       successEl.innerHTML = successEl.getAttribute('data-' + currentLang);
       setTimeout(() => closeReviewForm(), 2000);
     } catch(e) {
-      errEl.textContent = currentLang === 'pl' ? 'Błąd. Spróbuj ponownie.' : 'Error. Please try again.';
+      errEl.textContent = (currentLang === 'pl' ? 'Błąd: ' : 'Error: ') + e.message;
       errEl.style.display = 'block';
       btn.disabled = false;
+      btn.textContent = currentLang === 'pl' ? 'OPUBLIKUJ RECENZJĘ' : 'PUBLISH REVIEW';
     }
   }
 
