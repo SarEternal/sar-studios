@@ -434,9 +434,9 @@
     try {
       const [fd, td, rd] = await Promise.all([ghGet('_data/films.json'), ghGet('_data/team.json'), ghGet('_data/reviews.json')]);
       filmsSha = fd.sha; teamSha = td.sha; reviewsSha = rd.sha;
-      filmsData = JSON.parse(atob(fd.content.replace(/\n/g, '')));
-      teamData  = JSON.parse(atob(td.content.replace(/\n/g, '')));
-      reviewsData = JSON.parse(atob(rd.content.replace(/\n/g, '')));
+      filmsData   = JSON.parse(decodeURIComponent(escape(atob(fd.content.replace(/\n/g, '')))));
+      teamData    = JSON.parse(decodeURIComponent(escape(atob(td.content.replace(/\n/g, '')))));
+      reviewsData = JSON.parse(decodeURIComponent(escape(atob(rd.content.replace(/\n/g, '')))));
       renderFilms(); renderTeam(); renderReviews();
       setStatus('', '');
     } catch(e) { setStatus('Load error: ' + e.message, 'error'); }
