@@ -466,6 +466,12 @@
     const btn = document.getElementById('commitBtn');
     btn.disabled = true; setStatus('Saving...', 'saving');
     try {
+      /* Always fetch fresh SHAs before saving to avoid mismatch errors */
+      const [fsh, tsh, rsh] = await Promise.all([
+        ghGet('_data/films.json'), ghGet('_data/team.json'), ghGet('_data/reviews.json')
+      ]);
+      filmsSha = fsh.sha; teamSha = tsh.sha; reviewsSha = rsh.sha;
+
       const [fr, tr, rr] = await Promise.all([
         ghPut('_data/films.json',   JSON.stringify(filmsData,   null, 2), filmsSha,   msg),
         ghPut('_data/team.json',    JSON.stringify(teamData,    null, 2), teamSha,    msg),
