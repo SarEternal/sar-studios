@@ -89,10 +89,10 @@
   .review-film-genre { font-size: 9px; letter-spacing: 2px; color: var(--red); text-transform: uppercase; margin-top: 2px; }
 
   .review-stars { display: flex; align-items: center; gap: 2px; margin-bottom: 14px; }
-  .star { font-size: 14px; line-height: 1; }
+  .star { font-size: 20px; line-height: 1; }
   .star.full { color: var(--yellow); }
   .star.empty { color: rgba(255,255,255,0.15); }
-  .star.half-sym { font-size: 10px; color: var(--yellow); line-height: 1; vertical-align: middle; margin-left: -1px; }
+  .star.half-sym { font-size: 13px; color: var(--yellow); line-height: 1; margin-left: 1px; }
 
   .review-text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 14px; line-height: 1.7; opacity: 0.75; margin-bottom: 16px; }
   .review-author-row { display: flex; align-items: center; gap: 8px; }
@@ -399,14 +399,10 @@
     const hasHalf = (rating % 1) >= 0.5;
     let html = '<div class="review-stars">';
     for (let i = 1; i <= 5; i++) {
-      if (i <= fullCount) {
-        html += '<span class="star full">&#9733;</span>';
-      } else if (i === fullCount + 1 && hasHalf) {
-        html += '<span class="star full">&#9733;</span><span class="star half-sym">&#189;</span>';
-      } else {
-        html += '<span class="star empty">&#9733;</span>';
-      }
+      if (i <= fullCount) html += '<span class="star full">★</span>';
+      else html += '<span class="star empty">★</span>';
     }
+    if (hasHalf) html += '<span class="star half-sym">½</span>';
     html += '</div>';
     return html;
   }
