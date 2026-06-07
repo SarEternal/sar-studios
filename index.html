@@ -49,6 +49,7 @@
   .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; }
   .stat-text { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-top: 4px; }
 
+  /* FILMS */
   #films { background: var(--black); padding: 120px 48px; }
   .section-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 5vw, 80px); margin-bottom: 64px; }
   .films-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
@@ -73,10 +74,12 @@
   .film-warning.tooltip-open .tooltip { opacity: 1; }
   .films-empty { grid-column: 1 / -1; padding: 80px; text-align: center; background: var(--grey); font-family: 'DM Serif Display', serif; font-style: italic; font-size: 20px; opacity: 0.4; }
 
+  /* REVIEWS SECTION */
   #reviews { background: #0f0f0f; padding: 120px 48px; }
   .reviews-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; flex-wrap: wrap; gap: 24px; }
   .leave-review-btn { background: var(--red); color: var(--offwhite); font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; border: none; padding: 14px 32px; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; white-space: nowrap; }
   .leave-review-btn:hover { opacity: 0.85; }
+
   .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
   .review-card { background: var(--grey); padding: 28px; position: relative; }
   .review-film-thumb { width: 36px; height: 52px; object-fit: cover; border-radius: 1px; flex-shrink: 0; }
@@ -84,36 +87,11 @@
   .review-film-info { min-width: 0; }
   .review-film-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .review-film-genre { font-size: 9px; letter-spacing: 2px; color: var(--red); text-transform: uppercase; margin-top: 2px; }
-
-  /* ── LETTERBOXD-STYLE STARS ── */
-  .lb-stars { display: flex; align-items: center; gap: 1px; }
-  .lb-star { position: relative; display: inline-block; flex-shrink: 0; }
-  .lb-star svg { display: block; }
-  .lb-star .lb-star-fg { position: absolute; top: 0; left: 0; overflow: hidden; }
-  /* half = clip right 50%, full = show all, none = hidden */
-  .lb-star.half .lb-star-fg { width: 50%; }
-  .lb-star.full .lb-star-fg { width: 100%; }
-  .lb-star.empty .lb-star-fg { width: 0%; }
-
-  /* Picker-size stars */
-  .lb-stars-picker .lb-star { width: 44px; height: 44px; cursor: pointer; }
-  .lb-stars-picker .lb-star svg { width: 44px; height: 44px; }
-  .lb-stars-picker .lb-star .lb-star-fg svg { width: 44px; height: 44px; }
-
-  /* Display-size stars (reviews) */
-  .lb-stars-display .lb-star { width: 16px; height: 16px; }
-  .lb-stars-display .lb-star svg { width: 16px; height: 16px; }
-  .lb-stars-display .lb-star .lb-star-fg svg { width: 16px; height: 16px; }
-
-  /* Modal-size stars */
-  .lb-stars-modal .lb-star { width: 14px; height: 14px; }
-  .lb-stars-modal .lb-star svg { width: 14px; height: 14px; }
-  .lb-stars-modal .lb-star .lb-star-fg svg { width: 14px; height: 14px; }
-
-  .star-rating-display { font-size: 14px; letter-spacing: 1px; color: var(--yellow); margin-left: 12px; min-width: 36px; opacity: 0; transition: opacity 0.15s; }
-  .star-rating-display.visible { opacity: 1; }
-  .star-picker-hint { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.3; margin-bottom: 10px; }
-
+  .review-stars { display: flex; gap: 2px; margin-bottom: 14px; }
+  .star { font-size: 14px; line-height: 1; }
+  .star.full { color: var(--yellow); }
+  .star.half { color: var(--yellow); opacity: 0.5; }
+  .star.empty { color: rgba(255,255,255,0.15); }
   .review-text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 14px; line-height: 1.7; opacity: 0.75; margin-bottom: 16px; }
   .review-author-row { display: flex; align-items: center; gap: 8px; }
   .review-author { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; }
@@ -122,6 +100,7 @@
   .badge-past { background: rgba(255,255,255,0.1); color: var(--offwhite); border: 1px solid rgba(255,255,255,0.2); }
   .reviews-empty { grid-column: 1 / -1; padding: 80px; text-align: center; font-family: 'DM Serif Display', serif; font-style: italic; font-size: 20px; opacity: 0.3; }
 
+  /* MODAL REVIEWS */
   .modal-reviews { margin-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; }
   .modal-reviews-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
   .modal-reviews-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; }
@@ -132,10 +111,12 @@
   .modal-reviews-list::-webkit-scrollbar-track { background: transparent; }
   .modal-reviews-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
   .modal-review-item { background: rgba(255,255,255,0.04); padding: 16px; border-radius: 2px; border-left: 2px solid rgba(255,255,255,0.06); }
+  .modal-review-item .review-stars { margin-bottom: 8px; }
   .modal-review-item .review-text { font-size: 13px; margin-bottom: 10px; }
   .modal-review-item .review-author-row { gap: 6px; }
   .modal-reviews-none { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 14px; opacity: 0.3; text-align: center; padding: 24px 0; }
 
+  /* REVIEW FORM MODAL */
   .review-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2000; display: none; align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto; }
   .review-modal-overlay.open { display: flex; }
   .review-modal-box { background: var(--grey); width: 100%; max-width: 560px; border-radius: 2px; overflow: hidden; margin: auto; flex-shrink: 0; }
@@ -145,6 +126,7 @@
   .review-modal-close:hover { opacity: 1; }
   .review-modal-body { padding: 28px; display: flex; flex-direction: column; gap: 20px; }
 
+  /* Film picker */
   .film-picker-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; margin-bottom: 10px; display: block; }
   .film-picker-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
   .film-pick-card { cursor: pointer; border-radius: 2px; overflow: hidden; position: relative; aspect-ratio: 2/3; border: 2px solid transparent; transition: border-color 0.2s; }
@@ -154,6 +136,15 @@
   .film-pick-card.selected { border-color: var(--yellow); }
   .film-pick-card.selected .pick-overlay { background: rgba(245,200,0,0.15); }
 
+  /* Star picker — simple */
+  .star-picker-hint { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.3; margin-bottom: 10px; }
+  .star-picker { display: flex; gap: 4px; align-items: center; width: fit-content; }
+  .star-pick { font-size: 32px; cursor: pointer; color: rgba(255,255,255,0.15); transition: color 0.1s; line-height: 1; user-select: none; }
+  .star-pick.half-btn { font-size: 20px; opacity: 0.5; }
+  .star-pick.active { color: var(--yellow); opacity: 1; }
+  .star-rating-display { font-size: 13px; letter-spacing: 1px; margin-left: 10px; color: var(--yellow); min-width: 32px; }
+
+  /* Form fields */
   .review-field-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4; margin-bottom: 6px; display: block; }
   .review-field-input, .review-field-textarea { width: 100%; background: var(--black); border: 1px solid rgba(255,255,255,0.08); color: var(--offwhite); font-family: 'Space Mono', monospace; font-size: 12px; padding: 12px 14px; border-radius: 2px; outline: none; transition: border-color 0.2s; }
   .review-field-input:focus, .review-field-textarea:focus { border-color: var(--yellow); }
@@ -164,6 +155,7 @@
   .review-error { font-size: 10px; letter-spacing: 1px; color: var(--red); display: none; }
   .review-success { font-size: 11px; letter-spacing: 1px; color: #4CAF50; display: none; text-align: center; padding: 8px 0; }
 
+  /* TEAM */
   #team { background: var(--grey); padding: 120px 48px; }
   .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
   .team-card { background: var(--black); position: relative; overflow: hidden; transition: background 0.3s; cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -179,6 +171,7 @@
   .team-card:hover .team-role, .team-card.active .team-role { color: var(--black); }
   .team-card:hover .team-bio, .team-card.active .team-bio { opacity: 0.8; }
 
+  /* CONTACT */
   #contact { background: var(--red); color: var(--black); text-align: center; padding: 120px 48px; position: relative; overflow: hidden; }
   #contact::before { content: 'KONTAKT'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Bebas Neue', sans-serif; font-size: 200px; color: rgba(0,0,0,0.06); white-space: nowrap; pointer-events: none; }
   .contact-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; opacity: 0.6; margin-bottom: 24px; }
@@ -187,6 +180,7 @@
   .contact-email:hover { opacity: 0.6; }
   footer { background: var(--black); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 2px; color: var(--offwhite); opacity: 0.3; text-transform: uppercase; }
 
+  /* FILM MODAL */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: none; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 80px 20px 40px; }
   .modal-overlay.open { display: flex; }
   .modal-inner { position: relative; width: 90vw; max-width: 1000px; }
@@ -346,7 +340,7 @@
         <span class="review-field-label" data-pl="Twoja ocena" data-en="Your rating">Twoja ocena</span>
         <p class="star-picker-hint" data-pl="Przesuń po gwiazdkach — możesz dać pół gwiazdki" data-en="Hover over stars — half stars supported">Przesuń po gwiazdkach — możesz dać pół gwiazdki</p>
         <div style="display:flex; align-items:center;">
-          <div class="lb-stars lb-stars-picker" id="starPicker"></div>
+          <div class="lb-stars" id="starPicker"></div>
           <span class="star-rating-display" id="starDisplay"></span>
         </div>
       </div>
@@ -374,90 +368,9 @@
   let currentLang = 'pl';
   let allFilms = [];
   let allReviews = [];
+  let reviewsSha = '';
   let selectedFilm = null;
   let selectedRating = 0;
-
-  /* ── STAR SVG PATHS ── */
-  const STAR_PATH = 'M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z';
-  const STAR_EMPTY_COLOR = 'rgba(255,255,255,0.12)';
-  const STAR_FILL_COLOR = '#F5C800';
-
-  /* Build a single lb-star element */
-  function makeLbStar(size) {
-    const wrap = document.createElement('div');
-    wrap.className = 'lb-star empty';
-
-    const bg = document.createElement('div');
-    bg.style.cssText = `width:${size}px; height:${size}px; display:flex; align-items:center; justify-content:center;`;
-    bg.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg"><path d="${STAR_PATH}" fill="${STAR_EMPTY_COLOR}"/></svg>`;
-
-    const fg = document.createElement('div');
-    fg.className = 'lb-star-fg';
-    fg.style.cssText = `height:${size}px; display:flex; align-items:center; justify-content:center; position:absolute; top:0; left:0; overflow:hidden; width:0%;`;
-    fg.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg"><path d="${STAR_PATH}" fill="${STAR_FILL_COLOR}"/></svg>`;
-
-    wrap.style.cssText = `position:relative; display:inline-block; width:${size}px; height:${size}px; flex-shrink:0;`;
-    wrap.appendChild(bg);
-    wrap.appendChild(fg);
-    return wrap;
-  }
-
-  /* Render stars HTML string for display (reviews, modal) */
-  function renderStars(rating, size) {
-    size = size || 16;
-    let html = '<div class="lb-stars" style="display:flex;align-items:center;gap:1px;">';
-    for (let i = 1; i <= 5; i++) {
-      const filled = rating >= i ? '100%' : rating >= i - 0.5 ? '50%' : '0%';
-      html += `<span style="position:relative;display:inline-block;width:${size}px;height:${size}px;flex-shrink:0;">
-        <svg viewBox="0 0 24 24" width="${size}" height="${size}" style="display:block;"><path d="${STAR_PATH}" fill="${STAR_EMPTY_COLOR}"/></svg>
-        <span style="position:absolute;top:0;left:0;width:${filled};height:${size}px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
-          <svg viewBox="0 0 24 24" width="${size}" height="${size}"><path d="${STAR_PATH}" fill="${STAR_FILL_COLOR}"/></svg>
-        </span>
-      </span>`;
-    }
-    html += '</div>';
-    return html;
-  }
-
-  /* ── STAR PICKER (interactive) ── */
-  const starPickerEl = document.getElementById('starPicker');
-  const starDisplay = document.getElementById('starDisplay');
-  const pickerSize = 40;
-  const pickerSlots = [];
-
-  for (let i = 1; i <= 5; i++) {
-    const slot = makeLbStar(pickerSize);
-    slot.dataset.full = i;
-    slot.dataset.half = i - 0.5;
-    starPickerEl.appendChild(slot);
-    pickerSlots.push(slot);
-  }
-
-  function applyPickerHighlight(val) {
-    pickerSlots.forEach(slot => {
-      const fg = slot.querySelector('.lb-star-fg');
-      const full = parseFloat(slot.dataset.full);
-      const half = parseFloat(slot.dataset.half);
-      const w = val >= full ? '100%' : val >= half ? '50%' : '0%';
-      fg.style.width = w;
-    });
-    if (val > 0) { starDisplay.textContent = val + '/5'; starDisplay.classList.add('visible'); }
-    else { starDisplay.textContent = ''; starDisplay.classList.remove('visible'); }
-  }
-
-  function getPickerVal(slot, e) {
-    const rect = slot.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const x = clientX - rect.left;
-    return x < rect.width / 2 ? parseFloat(slot.dataset.half) : parseFloat(slot.dataset.full);
-  }
-
-  pickerSlots.forEach(slot => {
-    slot.addEventListener('mousemove', e => applyPickerHighlight(getPickerVal(slot, e)));
-    slot.addEventListener('click', e => { selectedRating = getPickerVal(slot, e); applyPickerHighlight(selectedRating); });
-    slot.addEventListener('touchstart', e => { e.preventDefault(); selectedRating = getPickerVal(slot, e); applyPickerHighlight(selectedRating); }, { passive: false });
-  });
-  starPickerEl.addEventListener('mouseleave', () => applyPickerHighlight(selectedRating));
 
   /* ── LANG ── */
   function setLang(lang) {
@@ -481,10 +394,21 @@
     return m ? `https://www.youtube.com/embed/${m[1]}?autoplay=1` : url;
   }
 
+  /* ── STARS RENDER ── */
+  function renderStars(rating) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) html += '<span class="star full">★</span>';
+      else if (rating >= i - 0.5) html += '<span class="star half">★</span>';
+      else html += '<span class="star empty">★</span>';
+    }
+    return html;
+  }
+
   /* ── BADGE ── */
   function badgeHtml(review) {
-    if (review.badge === 'current') return `<span class="review-badge badge-current">${currentLang === 'pl' ? 'Członek Ekipy' : 'Crew Member'}</span>`;
-    if (review.badge === 'past') return `<span class="review-badge badge-past">${currentLang === 'pl' ? 'Były Członek' : 'Past Member'}</span>`;
+    if (review.badge === 'current') return `<span class="review-badge badge-current" data-pl="Członek Ekipy" data-en="Crew Member">${currentLang === 'pl' ? 'Członek Ekipy' : 'Crew Member'}</span>`;
+    if (review.badge === 'past') return `<span class="review-badge badge-past" data-pl="Były Członek" data-en="Past Member">${currentLang === 'pl' ? 'Były Członek' : 'Past Member'}</span>`;
     return '';
   }
 
@@ -508,14 +432,14 @@
     const reviewsHtml = filmReviews.length
       ? filmReviews.map(r => `
           <div class="modal-review-item">
-            <div style="margin-bottom:8px;">${renderStars(r.rating, 14)}</div>
+            <div class="review-stars">${renderStars(r.rating)}</div>
             <p class="review-text">${escHtml(r.text)}</p>
             <div class="review-author-row">
               <span class="review-author">${escHtml(r.name)}</span>
               ${badgeHtml(r)}
             </div>
           </div>`).join('')
-      : `<p class="modal-reviews-none">${currentLang === 'pl' ? 'Brak recenzji dla tego filmu.' : 'No reviews for this film yet.'}</p>`;
+      : `<p class="modal-reviews-none" data-pl="Brak recenzji dla tego filmu." data-en="No reviews for this film yet.">${currentLang === 'pl' ? 'Brak recenzji dla tego filmu.' : 'No reviews for this film yet.'}</p>`;
 
     modalInfo.innerHTML = `
       <p class="modal-info-genre">${film.genre}</p>
@@ -535,8 +459,8 @@
       </div>` : ''}
       <div class="modal-reviews">
         <div class="modal-reviews-header">
-          <span class="modal-reviews-title">${currentLang === 'pl' ? 'Recenzje' : 'Reviews'}</span>
-          <button class="modal-leave-review-btn" onclick="openReviewForm('${escAttr(film.title)}')">${currentLang === 'pl' ? '+ Zostaw recenzję' : '+ Leave a review'}</button>
+          <span class="modal-reviews-title" data-pl="Recenzje" data-en="Reviews">${currentLang === 'pl' ? 'Recenzje' : 'Reviews'}</span>
+          <button class="modal-leave-review-btn" onclick="openReviewForm('${escAttr(film.title)}')" data-pl="+ Zostaw recenzję" data-en="+ Leave a review">${currentLang === 'pl' ? '+ Zostaw recenzję' : '+ Leave a review'}</button>
         </div>
         <div class="modal-reviews-list">${reviewsHtml}</div>
       </div>
@@ -563,7 +487,7 @@
     document.getElementById('reviewError').style.display = 'none';
     document.getElementById('reviewSuccess').style.display = 'none';
     document.getElementById('reviewSubmitBtn').disabled = false;
-    applyPickerHighlight(0);
+    updateStarPicker(0);
     buildFilmPicker(preselectedTitle);
     document.getElementById('reviewModal').classList.add('open');
   }
@@ -591,6 +515,83 @@
     });
   }
 
+  function updateStarPicker(val) {
+    selectedRating = val;
+    document.querySelectorAll('.star-pick').forEach(s => {
+      s.classList.toggle('active', parseFloat(s.dataset.val) <= val);
+    });
+    document.getElementById('starDisplay').textContent = val > 0 ? val + '/5' : '—';
+  }
+
+  /* ── SVG STAR PICKER ── */
+  const STAR_PATH = 'M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z';
+  const STAR_EMPTY_COLOR = 'rgba(255,255,255,0.12)';
+  const STAR_FILL_COLOR = '#F5C800';
+  const pickerSize = 40;
+  const pickerSlots = [];
+  const starPickerEl = document.getElementById('starPicker');
+  const starDisplay = document.getElementById('starDisplay');
+
+  function makeLbStar(size) {
+    const wrap = document.createElement('div');
+    wrap.className = 'lb-star';
+    wrap.style.cssText = `position:relative;display:inline-block;width:${size}px;height:${size}px;flex-shrink:0;cursor:pointer;`;
+    const bg = document.createElement('div');
+    bg.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}"><path d="${STAR_PATH}" fill="${STAR_EMPTY_COLOR}"/></svg>`;
+    const fg = document.createElement('div');
+    fg.className = 'lb-star-fg';
+    fg.style.cssText = `position:absolute;top:0;left:0;height:${size}px;overflow:hidden;width:0%;display:flex;align-items:center;`;
+    fg.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}"><path d="${STAR_PATH}" fill="${STAR_FILL_COLOR}"/></svg>`;
+    wrap.appendChild(bg); wrap.appendChild(fg);
+    return wrap;
+  }
+
+  function renderStars(rating, size) {
+    size = size || 16;
+    let html = '<div style="display:flex;align-items:center;gap:1px;">';
+    for (let i = 1; i <= 5; i++) {
+      const pct = rating >= i ? '100%' : rating >= i - 0.5 ? '50%' : '0%';
+      html += `<span style="position:relative;display:inline-block;width:${size}px;height:${size}px;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" width="${size}" height="${size}" style="display:block;"><path d="${STAR_PATH}" fill="${STAR_EMPTY_COLOR}"/></svg>
+        <span style="position:absolute;top:0;left:0;width:${pct};height:${size}px;overflow:hidden;display:flex;align-items:center;">
+          <svg viewBox="0 0 24 24" width="${size}" height="${size}"><path d="${STAR_PATH}" fill="${STAR_FILL_COLOR}"/></svg>
+        </span>
+      </span>`;
+    }
+    html += '</div>';
+    return html;
+  }
+
+  for (let i = 1; i <= 5; i++) {
+    const slot = makeLbStar(pickerSize);
+    slot.dataset.full = i; slot.dataset.half = i - 0.5;
+    starPickerEl.appendChild(slot); pickerSlots.push(slot);
+  }
+
+  function applyPickerHighlight(val) {
+    pickerSlots.forEach(slot => {
+      const fg = slot.querySelector('.lb-star-fg');
+      const full = parseFloat(slot.dataset.full);
+      const half = parseFloat(slot.dataset.half);
+      fg.style.width = val >= full ? '100%' : val >= half ? '50%' : '0%';
+    });
+    if (val > 0) { starDisplay.textContent = val + '/5'; starDisplay.classList.add('visible'); }
+    else { starDisplay.textContent = ''; starDisplay.classList.remove('visible'); }
+  }
+
+  function getPickerVal(slot, e) {
+    const rect = slot.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return (clientX - rect.left) < rect.width / 2 ? parseFloat(slot.dataset.half) : parseFloat(slot.dataset.full);
+  }
+
+  pickerSlots.forEach(slot => {
+    slot.addEventListener('mousemove', e => applyPickerHighlight(getPickerVal(slot, e)));
+    slot.addEventListener('click', e => { selectedRating = getPickerVal(slot, e); applyPickerHighlight(selectedRating); });
+    slot.addEventListener('touchstart', e => { e.preventDefault(); selectedRating = getPickerVal(slot, e); applyPickerHighlight(selectedRating); }, { passive: false });
+  });
+  starPickerEl.addEventListener('mouseleave', () => applyPickerHighlight(selectedRating));
+
   async function submitReview() {
     const name = document.getElementById('reviewName').value.trim();
     const text = document.getElementById('reviewText').value.trim();
@@ -606,30 +607,17 @@
     const btn = document.getElementById('reviewSubmitBtn');
     btn.disabled = true;
 
-    const token = localStorage.getItem('sar_token');
-    if (!token) {
-      errEl.textContent = currentLang === 'pl' ? 'Brak autoryzacji. Zaloguj się do panelu admina w tej przeglądarce.' : 'Not authorised. Log into the admin panel in this browser first.';
-      errEl.style.display = 'block'; btn.disabled = false; return;
-    }
-
-    const newReview = { id: Date.now(), filmTitle: selectedFilm, rating: selectedRating, name, text, badge: null, date: new Date().toISOString().split('T')[0] };
-    const updatedReviews = [...allReviews, newReview];
-
     try {
-      const shaRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/_data/reviews.json', {
-        headers: { Authorization: 'token ' + token }
-      });
-      const shaData = await shaRes.json();
-      const sha = shaData.sha;
-
-      const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/_data/reviews.json', {
-        method: 'PUT',
-        headers: { Authorization: 'token ' + token, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: 'New review for ' + selectedFilm + ' by ' + name, content: btoa(unescape(encodeURIComponent(JSON.stringify(updatedReviews, null, 2)))), sha })
+      const res = await fetch('https://sar-reviews.y5cdd7h9jy.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filmTitle: selectedFilm, rating: selectedRating, name, text })
       });
 
-      if (!res.ok) { const err = await res.json(); throw new Error(err.message || 'Failed'); }
-      allReviews = updatedReviews;
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed');
+
+      allReviews = [...allReviews, data.review];
       renderReviews();
       successEl.style.display = 'block';
       successEl.innerHTML = successEl.getAttribute('data-' + currentLang);
@@ -644,7 +632,7 @@
   function renderReviews() {
     const grid = document.getElementById('reviewsGrid');
     if (!allReviews.length) {
-      grid.innerHTML = `<div class="reviews-empty">${currentLang === 'pl' ? 'Brak recenzji. Bądź pierwszy!' : 'No reviews yet. Be the first!'}</div>`;
+      grid.innerHTML = `<div class="reviews-empty" data-pl="Brak recenzji. Bądź pierwszy!" data-en="No reviews yet. Be the first!">${currentLang === 'pl' ? 'Brak recenzji. Bądź pierwszy!' : 'No reviews yet. Be the first!'}</div>`;
       return;
     }
     grid.innerHTML = '';
@@ -661,7 +649,7 @@
             ${film ? `<div class="review-film-genre">${film.genre}</div>` : ''}
           </div>
         </div>
-        <div style="margin-bottom:14px;">${renderStars(r.rating, 16)}</div>
+        <div class="review-stars">${renderStars(r.rating)}</div>
         <p class="review-text">${escHtml(r.text)}</p>
         <div class="review-author-row">
           <span class="review-author">${escHtml(r.name)}</span>
