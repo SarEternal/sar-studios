@@ -117,9 +117,9 @@
   .modal-reviews-none { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 14px; opacity: 0.3; text-align: center; padding: 24px 0; }
 
   /* REVIEW FORM MODAL */
-  .review-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .review-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2000; display: none; align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto; }
   .review-modal-overlay.open { display: flex; }
-  .review-modal-box { background: var(--grey); width: 100%; max-width: 560px; border-radius: 2px; overflow: hidden; }
+  .review-modal-box { background: var(--grey); width: 100%; max-width: 560px; border-radius: 2px; overflow: hidden; margin: auto; flex-shrink: 0; }
   .review-modal-header { background: var(--black); padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); }
   .review-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; }
   .review-modal-close { background: none; border: none; color: var(--offwhite); font-size: 18px; cursor: pointer; opacity: 0.4; transition: opacity 0.2s; line-height: 1; }
@@ -137,21 +137,25 @@
   .film-pick-card.selected .pick-overlay { background: rgba(245,200,0,0.15); }
 
   /* Star picker — Letterboxd style */
-  .star-picker-wrap { position: relative; }
-  .star-picker-hint { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.3; margin-bottom: 8px; }
-  .star-picker { display: flex; gap: 0; align-items: center; cursor: pointer; width: fit-content; }
-  .star-pick-slot { position: relative; width: 32px; height: 36px; display: flex; align-items: center; justify-content: center; }
-  .star-pick-slot .s-full, .star-pick-slot .s-half {
-    position: absolute; font-size: 28px; line-height: 1;
-    color: rgba(255,255,255,0.12); transition: color 0.1s;
-    user-select: none; pointer-events: none;
+  .star-picker-hint { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.3; margin-bottom: 10px; }
+  .star-picker { display: flex; gap: 2px; align-items: center; cursor: pointer; width: fit-content; }
+  .star-pick-slot { position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+  .star-pick-slot .s-full {
+    position: absolute; font-size: 38px; line-height: 1;
+    color: rgba(255,255,255,0.12); transition: color 0.08s;
+    user-select: none; pointer-events: none; left: 0; width: 100%; text-align: center;
   }
-  .star-pick-slot .s-full { left: 0; width: 100%; text-align: center; }
-  .star-pick-slot .s-half { left: 0; width: 50%; overflow: hidden; text-align: left; }
+  .star-pick-slot .s-half {
+    position: absolute; font-size: 38px; line-height: 1;
+    color: rgba(255,255,255,0.12); transition: color 0.08s;
+    user-select: none; pointer-events: none;
+    left: 0; width: 50%; overflow: hidden; text-align: left;
+  }
   .star-pick-slot.lit-full .s-full { color: var(--yellow); }
+  .star-pick-slot.lit-full .s-half { color: var(--yellow); }
   .star-pick-slot.lit-half .s-half { color: var(--yellow); }
   .star-pick-slot.lit-half .s-full { color: rgba(255,255,255,0.12); }
-  .star-rating-display { font-size: 13px; letter-spacing: 1px; margin-left: 12px; color: var(--yellow); opacity: 0; transition: opacity 0.15s; min-width: 32px; }
+  .star-rating-display { font-size: 14px; letter-spacing: 1px; margin-left: 14px; color: var(--yellow); opacity: 0; transition: opacity 0.15s; min-width: 36px; }
   .star-rating-display.visible { opacity: 1; }
 
   /* Form fields */
@@ -544,7 +548,8 @@
   function getSlotValue(slot, e) {
     const rect = slot.getBoundingClientRect();
     const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-    return x < rect.width / 2 ? parseFloat(slot.dataset.half) : parseFloat(slot.dataset.full);
+    /* right half = full star, left half = half star */
+    return x >= rect.width / 2 ? parseFloat(slot.dataset.full) : parseFloat(slot.dataset.half);
   }
 
   function highlightStars(val) {
@@ -582,36 +587,30 @@
     if (!name) { errEl.textContent = currentLang === 'pl' ? 'Podaj swoje imię.' : 'Please enter your name.'; errEl.style.display = 'block'; return; }
     if (!text) { errEl.textContent = currentLang === 'pl' ? 'Napisz recenzję.' : 'Please write a review.'; errEl.style.display = 'block'; return; }
 
-    /* One review per film per name */
-    const duplicate = allReviews.find(r => r.filmTitle === selectedFilm && r.name.toLowerCase() === name.toLowerCase());
-    if (duplicate) {
-      errEl.textContent = currentLang === 'pl' ? 'Już zostawiłeś recenzję tego filmu.' : 'You already reviewed this film.';
-      errEl.style.display = 'block'; return;
-    }
-
     errEl.style.display = 'none';
     const btn = document.getElementById('reviewSubmitBtn');
     btn.disabled = true;
-    btn.textContent = currentLang === 'pl' ? 'PUBLIKOWANIE...' : 'PUBLISHING...';
+
+    const token = localStorage.getItem('sar_token');
+    if (!token) {
+      errEl.textContent = currentLang === 'pl' ? 'Brak autoryzacji. Zaloguj się do panelu admina w tej przeglądarce.' : 'Not authorised. Log into the admin panel in this browser first.';
+      errEl.style.display = 'block'; btn.disabled = false; return;
+    }
 
     const newReview = { id: Date.now(), filmTitle: selectedFilm, rating: selectedRating, name, text, badge: null, date: new Date().toISOString().split('T')[0] };
     const updatedReviews = [...allReviews, newReview];
 
     try {
-      /* Get current SHA — handle case where file might not exist yet */
-      let sha = null;
-      try {
-        const shaRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/_data/reviews.json');
-        if (shaRes.ok) { const shaData = await shaRes.json(); sha = shaData.sha; }
-      } catch(e) { /* file doesn't exist yet, sha stays null */ }
-
-      const body = { message: 'New review for ' + selectedFilm + ' by ' + name, content: btoa(unescape(encodeURIComponent(JSON.stringify(updatedReviews, null, 2)))) };
-      if (sha) body.sha = sha;
+      const shaRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/_data/reviews.json', {
+        headers: { Authorization: 'token ' + token }
+      });
+      const shaData = await shaRes.json();
+      const sha = shaData.sha;
 
       const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/_data/reviews.json', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+        headers: { Authorization: 'token ' + token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'New review for ' + selectedFilm + ' by ' + name, content: btoa(unescape(encodeURIComponent(JSON.stringify(updatedReviews, null, 2)))), sha })
       });
 
       if (!res.ok) { const err = await res.json(); throw new Error(err.message || 'Failed'); }
@@ -621,10 +620,8 @@
       successEl.innerHTML = successEl.getAttribute('data-' + currentLang);
       setTimeout(() => closeReviewForm(), 2000);
     } catch(e) {
-      errEl.textContent = (currentLang === 'pl' ? 'Błąd: ' : 'Error: ') + e.message;
-      errEl.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = currentLang === 'pl' ? 'OPUBLIKUJ RECENZJĘ' : 'PUBLISH REVIEW';
+      errEl.textContent = currentLang === 'pl' ? 'Błąd. Spróbuj ponownie.' : 'Error. Please try again.';
+      errEl.style.display = 'block'; btn.disabled = false;
     }
   }
 
