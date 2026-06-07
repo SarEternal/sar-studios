@@ -5,16 +5,7 @@
     "rating": 4.5,
     "name": "Ewelina",
     "text": "Peak",
-    "badge": null,
-    "date": "2026-06-07"
-  },
-  {
-    "id": 1780860039743,
-    "filmTitle": "Morderca",
-    "rating": 3.5,
-    "name": "Hejsjd",
-    "text": "Bsbshshsjsjs",
-    "badge": null,
+    "badge": "past",
     "date": "2026-06-07"
   }
 ]
