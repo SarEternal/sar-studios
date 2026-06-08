@@ -21,12 +21,18 @@
     "name": "Yaroslav Kobel",
     "role": "Aktor / Muzyka",
     "bio": "Aktor i twórca muzyki w Sar Studios. Odpowiada za atmosferę dźwiękową naszych filmów.",
-    "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/v1779983377/IMG_6804_r2eo5v.jpg"
+    "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/q_auto/f_auto/v1780947839/IMG_6804_m2h85e.jpg"
   },
   {
     "name": "Tomasz Kulka",
     "role": "Kamerzysta",
     "bio": "Kamerzysta Sar Studios. Odpowiada za obraz i ujęcia w naszych produkcjach.",
     "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/v1779983376/IMG_6762_SnapseedCopy_awfpeg.jpg"
+  },
+  {
+    "name": "Dominika Żenczak",
+    "role": "Kontrola jakości / Rekwizyty / Makijaż ",
+    "bio": "Jest odpowiedzialna za Makijaż, kontrola jakości i dział rekwizytów. Dba o każdy detal na planie, dbając o to, by każdy kadr wyglądał dokładnie tak, jak powinien",
+    "photo": "https://res.cloudinary.com/dnhepadb0/image/upload/q_auto/f_auto/v1780947580/DSCF0138E_odr6lr.jpg"
   }
 ]
