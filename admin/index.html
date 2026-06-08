@@ -257,8 +257,7 @@
   .badge-btn:hover { border-color: var(--yellow); color: var(--yellow); }
   .badge-btn.active-current { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
   .badge-btn.active-past { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
-  .review-delete-btn { background: none; border: 1px solid var(--border); color: var(--offwhite); font-size: 12px; padding: 5px 10px; border-radius: 2px; cursor: pointer; transition: all 0.2s; opacity: 0.5; margin-left: auto; flex-shrink: 0; }
-  .review-delete-btn:hover { border-color: var(--red); color: var(--red); opacity: 1; }
+  .badge-btn.active-cast { background: var(--red); color: var(--offwhite); border-color: var(--red); }
 
   @media (max-width: 600px) {
     .admin-body { padding: 24px 16px 100px; }
@@ -733,6 +732,7 @@
           <div class="review-admin-actions">
             <button class="badge-btn ${review.badge === 'current' ? 'active-current' : ''}" onclick="setBadge('${review.id}', 'current')">⭐ Current Member</button>
             <button class="badge-btn ${review.badge === 'past' ? 'active-past' : ''}" onclick="setBadge('${review.id}', 'past')">Past Member</button>
+            <button class="badge-btn ${review.badge === 'cast' ? 'active-cast' : ''}" onclick="setBadge('${review.id}', 'cast')">🎬 In This Film</button>
             <button class="badge-btn ${!review.badge ? 'active-current' : ''}" style="${!review.badge ? 'border-color:rgba(255,255,255,0.3)' : ''}" onclick="setBadge('${review.id}', null)">No Badge</button>
             <button class="review-delete-btn" onclick="deleteReview('${review.id}')">✕ Delete</button>
           </div>
