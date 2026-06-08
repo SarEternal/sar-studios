@@ -14,7 +14,7 @@
     "rating": 4.5,
     "name": "Ewleina",
     "text": "Nieźle nieźle",
-    "badge": null,
+    "badge": "past",
     "date": "2026-06-07"
   },
   {
@@ -23,7 +23,7 @@
     "rating": 5,
     "name": "Rudy",
     "text": "Mocne gówno",
-    "badge": null,
+    "badge": "current",
     "date": "2026-06-07"
   },
   {
@@ -32,7 +32,7 @@
     "rating": 5,
     "name": "Rudy",
     "text": "Zajebiste",
-    "badge": null,
+    "badge": "current",
     "date": "2026-06-07"
   },
   {
@@ -41,7 +41,7 @@
     "rating": 5,
     "name": "Natan",
     "text": "W chuj mocne",
-    "badge": null,
+    "badge": "current",
     "date": "2026-06-07"
   }
 ]
